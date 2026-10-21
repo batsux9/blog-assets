@@ -1,0 +1,200 @@
+<!doctype html>
+<!-- little world of batsu — Tumblr template v0.1 (2026) -->
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#222c3b">
+  <title>{Title}{block:TagPage} — #{Tag}{/block:TagPage}{block:SearchPage} — search: {SearchQuery}{/block:SearchPage}{block:PostSummary} — {PostSummary}{/block:PostSummary}</title>
+  <meta name="description" content="{MetaDescription}">
+  <link rel="icon" href="{Favicon}">
+  <link rel="alternate" type="application/rss+xml" href="{RSS}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400..700&family=Inter:wght@400..700&display=swap" rel="stylesheet">
+  <style>
+__INLINE_CSS__
+{CustomCSS}
+</style>
+</head>
+<body>
+  <!-- Reference icons. Links are replaced with Tumblr-hosted asset URLs at build time. -->
+  <svg class="icon-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.9a5.5 5.5 0 0 0-7.8 0L12 5.96l-1.07-1.07a5.5 5.5 0 0 0-7.78 7.78L12 21l8.8-8.3a5.5 5.5 0 0 0 0-7.8z"/></symbol>
+    <symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4M3 11V8a2 2 0 0 1 2-2h16M7 22l-4-4 4-4m14-1v3a2 2 0 0 1-2 2H3"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-8.6 8.2 8.7 8.7 0 0 1-4.3-1.1L3 20l1.5-4.5A8 8 0 0 1 3 11.5a9 9 0 0 1 18 0z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2m10-10h-2M4 12H2m17-7-2 2M7 17l-2 2M5 5l2 2m10 10 2 2"/></symbol>
+  </svg>
+  <div class="site-shell" id="home">
+    <header class="titlebar">
+      <a class="brand" href="/" aria-label="Home">
+        <img alt="" src="__ASSET_PLUMBOB__">
+        <span class="brand-copy"><span class="brand-title">little world of batsu</span><span class="brand-subtitle">some random stuff</span></span>
+      </a>
+      <form class="search-wrap header-search" action="/search" method="get" role="search">
+        <svg class="stroke-icon" aria-hidden="true"><use href="#i-search"/></svg>
+        <input type="search" name="q" placeholder="search this blog" aria-label="Search this blog" value="{SearchQuery}">
+      </form>
+      <div aria-label="Decorative window controls" class="window-controls">
+        <span class="window-min"></span><span class="window-max"></span><span class="window-close">×</span>
+      </div>
+      <button class="mobile-menu icon-button" id="menuButton" aria-label="Open menu" aria-expanded="false" type="button"><svg class="stroke-icon" aria-hidden="true"><use href="#i-menu"/></svg></button>
+    </header>
+
+    <div class="shell-content">
+      <aside class="sidebar" id="sidebar">
+        <section class="profile">
+          <div class="profile-illustration"><img alt="A cozy house at night" src="__ASSET_AVATAR__"></div>
+          <h1>hi, it's batsu <span class="small-heart">♡</span></h1>
+          <p>a little corner of the internet for thoughts, screenshots and things i like.</p>
+          <p class="profile-interests">sims, pixels, design,<br>and everyday life.</p>
+        </section>
+        <nav class="side-nav" aria-label="Blog navigation">
+          <a class="nav-item {block:IndexPage}active{/block:IndexPage}" href="/"><img alt="" src="__ASSET_HOME__"><span>home</span></a>
+          {block:AskEnabled}<a class="nav-item" href="/ask"><img alt="" src="__ASSET_ASK__"><span>message</span></a>{/block:AskEnabled}
+          <!-- Create /downloads and /resources as Tumblr custom-layout pages later. -->
+          <a class="nav-item" href="/downloads"><img alt="" src="__ASSET_DOWNLOADS__"><span>downloads</span></a>
+          <a class="nav-item" href="/resources"><img alt="" src="__ASSET_RESOURCES__"><span>resources</span></a>
+          <a class="nav-item" href="/archive"><img alt="" src="__ASSET_ARCHIVE__"><span>archive</span></a>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="sidebar-note music-widget" aria-label="Music currently on rotation">
+            <div class="music-label">♫ on rotation</div>
+            <div class="music-track">
+              <div class="music-art" aria-hidden="true">♫</div>
+              <div class="music-info"><strong>Teardrop</strong><span>Massive Attack</span></div>
+            </div>
+          </div>
+          <div class="sidebar-bottom-row"><span>made for slow internet days</span><button aria-label="Switch color theme" class="theme-button" id="themeButton" title="Toggle dark / light" type="button"><svg class="stroke-icon" aria-hidden="true"><use href="#i-sun"/></svg></button></div>
+        </div>
+      </aside>
+
+      <main class="main-panel" id="mainContent">
+        <div class="post-list">
+          {block:TagPage}<div class="page-context">posts tagged <strong>#{Tag}</strong> · <a href="/">all posts</a></div>{/block:TagPage}
+          {block:SearchPage}<div class="page-context">search results for <strong>{SearchQuery}</strong> · <a href="/">all posts</a></div>{block:NoSearchResults}<div class="empty-state">No results found.</div>{/block:NoSearchResults}{/block:SearchPage}
+          {block:AskPage}
+          <section class="post-card ask-page-card">
+            <div class="post-body post-content">
+              <h2 class="post-text-title">send a message ♡</h2>
+              <iframe class="tumblr-ask-iframe" src="https://www.tumblr.com/ask_form/{Name}.tumblr.com" title="Send an ask" loading="lazy" frameborder="0" scrolling="no"></iframe>
+            </div>
+          </section>
+          {/block:AskPage}
+          {block:HomePage}{block:NoPosts}<div class="empty-state">No posts yet in this little corner ♡</div>{/block:NoPosts}{/block:HomePage}
+          {block:Posts}
+          <article class="post-card {PostType}" id="post-{PostID}">
+            <div class="post-top">
+              <div class="post-byline">
+                <img class="tiny-plumbob" src="__ASSET_PLUMBOB__" alt="">
+                {block:Date}<a class="post-date-link" href="{Permalink}"><time>{ShortMonth} {DayOfMonth}, {Year}</time></a>{/block:Date}
+                {block:PinnedPostLabel}<span class="mid-dot">·</span><span>{PinnedPostLabel}</span>{/block:PinnedPostLabel}
+              </div>
+            </div>
+            <div class="post-body post-content">
+              {block:Text}
+                {block:Title}<h2 class="post-text-title"><a href="{Permalink}">{Title}</a></h2>{/block:Title}
+                {block:NotReblog}{Body}{/block:NotReblog}
+                {block:RebloggedFrom}<div class="reblog-trail">{block:Reblogs}
+                  <section class="trail-entry"><div class="trail-author"><img src="{PortraitURL-64}" alt=""><strong><a href="{Permalink}">{Username}</a></strong></div><div class="trail-body">{Body}</div></section>
+                {/block:Reblogs}</div>{/block:RebloggedFrom}
+              {/block:Text}
+
+              {block:Photo}
+                <div class="post-media">{LinkOpenTag}<img src="{PhotoURL-HighRes}" alt="{PhotoAlt}" loading="lazy">{LinkCloseTag}</div>
+                {block:Caption}<div class="post-caption">{block:NotReblog}{Caption}{/block:NotReblog}{block:RebloggedFrom}<div class="reblog-trail">{block:Reblogs}<section class="trail-entry"><div class="trail-author"><img src="{PortraitURL-64}" alt=""><strong><a href="{Permalink}">{Username}</a></strong></div><div class="trail-body">{Body}</div></section>{/block:Reblogs}</div>{/block:RebloggedFrom}</div>{/block:Caption}
+              {/block:Photo}
+
+              {block:Photoset}
+                <div class="post-media">{Photoset-700}</div>
+                {block:Caption}<div class="post-caption">{block:NotReblog}{Caption}{/block:NotReblog}{block:RebloggedFrom}<div class="reblog-trail">{block:Reblogs}<section class="trail-entry"><div class="trail-author"><img src="{PortraitURL-64}" alt=""><strong><a href="{Permalink}">{Username}</a></strong></div><div class="trail-body">{Body}</div></section>{/block:Reblogs}</div>{/block:RebloggedFrom}</div>{/block:Caption}
+              {/block:Photoset}
+
+              {block:Quote}
+                <blockquote class="post-quote">{Quote}</blockquote>
+                {block:Source}<p>{Source}</p>{/block:Source}
+              {/block:Quote}
+
+              {block:Link}
+                <div class="link-card"><a href="{URL}" target="_blank" rel="noopener noreferrer"><strong>{Name}</strong></a>{block:Description}<div class="post-caption">{Description}</div>{/block:Description}</div>
+              {/block:Link}
+
+              {block:Chat}
+                {block:Title}<h2 class="post-text-title">{Title}</h2>{/block:Title}
+                <ul class="chat-lines">{block:Lines}<li>{block:Label}<strong>{Label}</strong> {/block:Label}{Line}</li>{/block:Lines}</ul>
+              {/block:Chat}
+
+              {block:Audio}
+                <div class="audio-post">{block:AlbumArt}<img class="album-art" src="{AlbumArtURL}" alt="">{/block:AlbumArt}
+                  {block:TrackName}<strong>{TrackName}</strong>{/block:TrackName} {block:Artist}<p>{Artist}</p>{/block:Artist}
+                  {block:AudioPlayer}{AudioPlayer}{/block:AudioPlayer}
+                </div>
+                {block:Caption}<div class="post-caption">{Caption}</div>{/block:Caption}
+              {/block:Audio}
+
+              {block:Video}
+                <div class="video-post">{Video-500}</div>
+                {block:Caption}<div class="post-caption">{Caption}</div>{/block:Caption}
+              {/block:Video}
+
+              {block:Answer}
+                <div class="ask-block"><strong>{Asker} asked:</strong><div>{Question}</div></div>
+                {block:Answerer}<div class="post-caption"><strong>{Answerer}</strong> {Answer}</div>{/block:Answerer}
+                <div class="post-caption">{Replies}</div>
+              {/block:Answer}
+            </div>
+
+            {block:HasTags}<div class="post-tags">{block:Tags}<a class="post-tag" href="{TagURL}">#{Tag}</a>{/block:Tags}</div>{/block:HasTags}
+            <div class="post-footer">
+              <span class="notes-count">{block:NoteCount}<a href="{Permalink}#notes">{NoteCountWithLabel}</a>{/block:NoteCount}</span>
+              <div class="post-actions">
+                <a class="action icon-button" href="{ReblogURL}" aria-label="Reblog post" title="Reblog"><svg class="stroke-icon" aria-hidden="true"><use href="#i-repeat"/></svg></a>
+                <a class="action icon-button" href="{Permalink}#notes" aria-label="Open notes" title="Notes"><svg class="stroke-icon" aria-hidden="true"><use href="#i-message"/></svg></a>
+                <span class="native-like" title="Like post">{LikeButton size="20" color="grey"}<svg class="stroke-icon like-button-art" aria-hidden="true"><use href="#i-heart"/></svg></span>
+              </div>
+            </div>
+            {block:PermalinkPage}{block:PostNotes}<section class="notes-panel" id="notes"><h2>notes</h2>{PostNotes-64}</section>{/block:PostNotes}{/block:PermalinkPage}
+          </article>
+          {/block:Posts}
+
+          {block:Pagination}<nav class="pagination" aria-label="Page navigation">
+            {block:PreviousPage}<a href="{PreviousPage}">← newer</a>{/block:PreviousPage}
+            <span>page {CurrentPage} / {TotalPages}</span>
+            {block:NextPage}<a href="{NextPage}">older →</a>{/block:NextPage}
+          </nav>{/block:Pagination}
+          {block:PermalinkPagination}<nav class="pagination" aria-label="Post navigation">
+            {block:PreviousPost}<a href="{PreviousPost}">← previous post</a>{/block:PreviousPost}
+            {block:NextPost}<a href="{NextPost}">next post →</a>{/block:NextPost}
+          </nav>{/block:PermalinkPagination}
+        </div>
+      </main>
+
+      <aside class="right-rail" aria-label="Blog widgets">
+        <section class="rail-panel featured-panel">
+          <div class="rail-head"><span class="little-star">✳</span> from my game</div>
+          <figure class="featured-figure">
+            <img src="__ASSET_FEATURED__" alt="A screenshot from my game">
+            <figcaption><span class="feature-kicker">current save</span><strong>little moments in my game</strong></figcaption>
+          </figure>
+        </section>
+        <section class="rail-panel tags-panel">
+          <div class="rail-head"><span class="little-star">✳</span> browse posts</div>
+          <div class="tag-list">
+            <a class="tag-pill hot" href="/tagged/sims">#sims</a>
+            <a class="tag-pill" href="/tagged/screenshots">#screenshots</a>
+            <a class="tag-pill" href="/tagged/gameplay">#gameplay</a>
+            <a class="tag-pill" href="/tagged/interface">#interface</a>
+            <a class="tag-pill" href="/tagged/photography">#photography</a>
+          </div>
+        </section>
+        <div class="rail-decoration"><img src="__ASSET_PLUMBOB__" alt=""><span>see you in pleasantview</span></div>
+      </aside>
+    </div>
+  </div>
+  <script>
+__INLINE_JS__
+</script>
+</body>
+</html>
