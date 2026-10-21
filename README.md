@@ -62,3 +62,5 @@ The theme follows the free-text icon-field pattern used by [Seyche's Lilac theme
 - **Show Music Widget**, **Music Track**, **Music Artist**: decorative right-rail track card replacing the formerly hardcoded "Browse Posts" tags.
 
 **Working process:** after editing source in GitHub, rerun `python build.py` and paste the newly generated `dist/theme.html` into Tumblr's HTML editor. A repository change does not automatically update the live blog. Note: `dist/local-preview.html` is a static snapshot, not a Tumblr renderer.
+
+The preview helper `make_preview.py` refreshes the **CSS and JS inside the checked-in visual snapshot**. It does not automatically re-render changing Tumblr page markup; verify layout changes in Tumblr's own preview.

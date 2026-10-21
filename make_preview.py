@@ -1,17 +1,20 @@
-"""Create a local visual-only preview from Tumblr source files."""
+"""Refresh CSS/JS inside the checked-in static preview snapshot.
+
+The preview HTML is a visual fixture, not a Tumblr render. Markup changes
+must be checked against the actual Tumblr theme or updated in the snapshot.
+"""
 from pathlib import Path
 import re
 
-R=Path(__file__).resolve().parent
-s=(R/"src/template.html").read_text(encoding="utf-8")
-s=s.replace("__INLINE_CSS__",(R/"src/theme.css").read_text(encoding="utf-8"))
-s=s.replace("__INLINE_JS__",(R/"src/theme.js").read_text(encoding="utf-8"))
-assets={}  # Current wallpaper and blog avatar use Tumblr theme variables
-assets.update({x.upper():"../assets/icons/"+x+".svg" for x in ("plumbob","home","ask","downloads","resources","archive")})
-for name,path in assets.items(): s=s.replace("__ASSET_"+name+"__",path)
-s=s.replace("{image:Wallpaper}","../assets/images/neighborhood-night.webp").replace("{image:Featured Screenshot}","../assets/images/neighborhood-night.webp").replace("{PortraitURL-128}","../assets/legacy/avatar.jpg")
-s=s.replace("{Title}","little world of batsu").replace("{MetaDescription}","Visual preview").replace("{Favicon}","../assets/icons/plumbob.svg")
-s=re.sub(r"\\{/?block:[^{}]+\\}","",s,flags=re.I)
-s=re.sub(r"\\{[A-Za-z][A-Za-z0-9: ]*\\}","",s)
-(R/"dist/local-preview.html").write_text(s,encoding="utf-8")
-print("Visual-only preview written; Tumblr blocks are not evaluated.")
+R = Path(__file__).resolve().parent
+snapshot = R / "dist/local-preview.html"
+html = snapshot.read_text(encoding="utf-8")
+css = (R / "src/theme.css").read_text(encoding="utf-8")
+css = css.replace('url("{image:Wallpaper}")', 'url("../assets/images/neighborhood-night.webp")')
+js = (R / "src/theme.js").read_text(encoding="utf-8")
+html, css_matches = re.subn(r"<style>[\s\S]*?</style>", lambda _: "<style>\n" + css + "\n</style>", html, count=1)
+html, js_matches = re.subn(r"<script>[\s\S]*?</script>", lambda _: "<script>\n" + js + "\n</script>", html, count=1)
+if css_matches != 1 or js_matches != 1:
+    raise RuntimeError("Expected exactly one inline style and script in preview")
+snapshot.write_text(html, encoding="utf-8")
+print("Updated static visual preview styles/scripts:", snapshot)
