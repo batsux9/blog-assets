@@ -9,6 +9,9 @@
   <meta name="description" content="{MetaDescription}">
   <link rel="icon" href="{Favicon}">
   <link rel="alternate" type="application/rss+xml" href="{RSS}">
+  <!-- Tumblr Customizer: wallpaper and optional right-rail screenshot -->
+  <meta name="image:Wallpaper" content="">
+  <meta name="image:Featured Screenshot" content="">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400..700&family=Inter:wght@400..700&display=swap" rel="stylesheet">
@@ -46,7 +49,7 @@ __INLINE_CSS__
     <div class="shell-content">
       <aside class="sidebar" id="sidebar">
         <section class="profile">
-          <div class="profile-illustration"><img alt="A cozy house at night" src="__ASSET_AVATAR__"></div>
+          <div class="profile-illustration"><img alt="Blog avatar" src="{PortraitURL-128}"></div>
           <h1>hi, it's batsu <span class="small-heart">♡</span></h1>
           <p>a little corner of the internet for thoughts, screenshots and things i like.</p>
           <p class="profile-interests">sims, pixels, design,<br>and everyday life.</p>
@@ -172,13 +175,15 @@ __INLINE_CSS__
       </main>
 
       <aside class="right-rail" aria-label="Blog widgets">
+        {block:IfFeaturedScreenshot}
         <section class="rail-panel featured-panel">
           <div class="rail-head"><span class="little-star">✳</span> from my game</div>
           <figure class="featured-figure">
-            <img src="__ASSET_FEATURED__" alt="A screenshot from my game">
+            <img src="{image:Featured Screenshot}" alt="A screenshot from my game">
             <figcaption><span class="feature-kicker">current save</span><strong>little moments in my game</strong></figcaption>
           </figure>
         </section>
+        {/block:IfFeaturedScreenshot}
         <section class="rail-panel tags-panel">
           <div class="rail-head"><span class="little-star">✳</span> browse posts</div>
           <div class="tag-list">

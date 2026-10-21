@@ -1,1 +1,1 @@
-New theme images go here. See project README.
+Optional image backups. `neighborhood-night.webp` is available here; the live wallpaper is chosen in Tumblr Theme Options. Tumblr supplies the blog avatar automatically. Featured Screenshot is an optional Tumblr theme image setting.

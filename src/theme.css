@@ -79,7 +79,7 @@ body {
   background-color: var(--canvas);
   background-image:
     linear-gradient(var(--wallpaper-overlay), var(--wallpaper-overlay)),
-    url("__ASSET_WALLPAPER__");
+    url("{image:Wallpaper}");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;

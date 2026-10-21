@@ -9,11 +9,13 @@
   <meta name="description" content="{MetaDescription}">
   <link rel="icon" href="{Favicon}">
   <link rel="alternate" type="application/rss+xml" href="{RSS}">
+  <!-- Tumblr Customizer: wallpaper and optional right-rail screenshot -->
+  <meta name="image:Wallpaper" content="">
+  <meta name="image:Featured Screenshot" content="">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400..700&family=Inter:wght@400..700&display=swap" rel="stylesheet">
   <style>
-/* The CSS below is generated from src/theme.css. Edit there, then run build.py. */
 /* Lullabytown — Sims 2-inspired Tumblr prototype.
    Edit the design tokens in :root first. Styles are kept in component groups;
    responsive adjustments are collected near the end. */
@@ -95,7 +97,7 @@ body {
   background-color: var(--canvas);
   background-image:
     linear-gradient(var(--wallpaper-overlay), var(--wallpaper-overlay)),
-    url("__ASSET_WALLPAPER__");
+    url("{image:Wallpaper}");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -1368,7 +1370,7 @@ img {
 .tumblr-ask-iframe { display: block; width: 100%; min-height: 260px; border: 0; }
 
 {CustomCSS}
-  </style>
+</style>
 </head>
 <body>
   <!-- Reference icons. Links are replaced with Tumblr-hosted asset URLs at build time. -->
@@ -1383,7 +1385,7 @@ img {
   <div class="site-shell" id="home">
     <header class="titlebar">
       <a class="brand" href="/" aria-label="Home">
-        <img alt="" src="__ASSET_PLUMBOB__">
+        <img alt="" src="https://batsux9.github.io/blog-assets/assets/icons/plumbob.svg">
         <span class="brand-copy"><span class="brand-title">little world of batsu</span><span class="brand-subtitle">some random stuff</span></span>
       </a>
       <form class="search-wrap header-search" action="/search" method="get" role="search">
@@ -1399,18 +1401,18 @@ img {
     <div class="shell-content">
       <aside class="sidebar" id="sidebar">
         <section class="profile">
-          <div class="profile-illustration"><img alt="A cozy house at night" src="__ASSET_AVATAR__"></div>
+          <div class="profile-illustration"><img alt="Blog avatar" src="{PortraitURL-128}"></div>
           <h1>hi, it's batsu <span class="small-heart">♡</span></h1>
           <p>a little corner of the internet for thoughts, screenshots and things i like.</p>
           <p class="profile-interests">sims, pixels, design,<br>and everyday life.</p>
         </section>
         <nav class="side-nav" aria-label="Blog navigation">
-          <a class="nav-item {block:IndexPage}active{/block:IndexPage}" href="/"><img alt="" src="__ASSET_HOME__"><span>home</span></a>
-          {block:AskEnabled}<a class="nav-item" href="/ask"><img alt="" src="__ASSET_ASK__"><span>message</span></a>{/block:AskEnabled}
+          <a class="nav-item {block:IndexPage}active{/block:IndexPage}" href="/"><img alt="" src="https://batsux9.github.io/blog-assets/assets/icons/home.svg"><span>home</span></a>
+          {block:AskEnabled}<a class="nav-item" href="/ask"><img alt="" src="https://batsux9.github.io/blog-assets/assets/icons/ask.svg"><span>message</span></a>{/block:AskEnabled}
           <!-- Create /downloads and /resources as Tumblr custom-layout pages later. -->
-          <a class="nav-item" href="/downloads"><img alt="" src="__ASSET_DOWNLOADS__"><span>downloads</span></a>
-          <a class="nav-item" href="/resources"><img alt="" src="__ASSET_RESOURCES__"><span>resources</span></a>
-          <a class="nav-item" href="/archive"><img alt="" src="__ASSET_ARCHIVE__"><span>archive</span></a>
+          <a class="nav-item" href="/downloads"><img alt="" src="https://batsux9.github.io/blog-assets/assets/icons/downloads.svg"><span>downloads</span></a>
+          <a class="nav-item" href="/resources"><img alt="" src="https://batsux9.github.io/blog-assets/assets/icons/resources.svg"><span>resources</span></a>
+          <a class="nav-item" href="/archive"><img alt="" src="https://batsux9.github.io/blog-assets/assets/icons/archive.svg"><span>archive</span></a>
         </nav>
         <div class="sidebar-bottom">
           <div class="sidebar-note music-widget" aria-label="Music currently on rotation">
@@ -1441,7 +1443,7 @@ img {
           <article class="post-card {PostType}" id="post-{PostID}">
             <div class="post-top">
               <div class="post-byline">
-                <img class="tiny-plumbob" src="__ASSET_PLUMBOB__" alt="">
+                <img class="tiny-plumbob" src="https://batsux9.github.io/blog-assets/assets/icons/plumbob.svg" alt="">
                 {block:Date}<a class="post-date-link" href="{Permalink}"><time>{ShortMonth} {DayOfMonth}, {Year}</time></a>{/block:Date}
                 {block:PinnedPostLabel}<span class="mid-dot">·</span><span>{PinnedPostLabel}</span>{/block:PinnedPostLabel}
               </div>
@@ -1525,13 +1527,15 @@ img {
       </main>
 
       <aside class="right-rail" aria-label="Blog widgets">
+        {block:IfFeaturedScreenshot}
         <section class="rail-panel featured-panel">
           <div class="rail-head"><span class="little-star">✳</span> from my game</div>
           <figure class="featured-figure">
-            <img src="__ASSET_FEATURED__" alt="A screenshot from my game">
+            <img src="{image:Featured Screenshot}" alt="A screenshot from my game">
             <figcaption><span class="feature-kicker">current save</span><strong>little moments in my game</strong></figcaption>
           </figure>
         </section>
+        {/block:IfFeaturedScreenshot}
         <section class="rail-panel tags-panel">
           <div class="rail-head"><span class="little-star">✳</span> browse posts</div>
           <div class="tag-list">
@@ -1542,7 +1546,7 @@ img {
             <a class="tag-pill" href="/tagged/photography">#photography</a>
           </div>
         </section>
-        <div class="rail-decoration"><img src="__ASSET_PLUMBOB__" alt=""><span>see you in pleasantview</span></div>
+        <div class="rail-decoration"><img src="https://batsux9.github.io/blog-assets/assets/icons/plumbob.svg" alt=""><span>see you in pleasantview</span></div>
       </aside>
     </div>
   </div>
@@ -1580,6 +1584,6 @@ img {
   });
 })();
 
-  </script>
+</script>
 </body>
 </html>
