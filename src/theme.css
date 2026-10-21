@@ -232,36 +232,22 @@ img {
   display: flex;
   gap: 4px;
   align-items: center;
-  margin-left: 0;
-  align-self: flex-start;
-  padding-top: 7px;
+  margin-left: auto;
+  align-self: center;
+  padding-top: 0;
   opacity: 0.75;
 }
 .window-controls span {
+  display: grid;
+  place-items: center;
   width: 17px;
   height: 15px;
   background: rgba(102, 124, 163, 0.28);
   border: 1px solid var(--border);
   border-radius: 2px;
   color: var(--muted);
-  text-align: center;
-  line-height: 12px;
-  font-family: var(--font-mono);
-  font-size: 13px;
 }
-.window-min::after {
-  content: "_";
-  position: relative;
-  top: -3px;
-}
-.window-max::after {
-  content: "□";
-  position: relative;
-  top: -2px;
-}
-.window-controls .window-close {
-  font-size: 13px;
-}
+.window-controls .ti { font-size: 11px; line-height: 1; }
 .mobile-menu {
   display: none !important;
 }
@@ -336,12 +322,18 @@ img {
     background 0.14s,
     border-color 0.14s;
 }
-.nav-item img {
+.nav-item > .ti {
+  display: grid;
+  place-items: center;
   width: 30px;
   height: 30px;
-  object-fit: contain;
   flex: 0 0 30px;
+  color: var(--muted);
+  font-size: 24px;
+  line-height: 1;
 }
+.nav-item.active > .ti,
+.nav-item:hover > .ti { color: var(--text); }
 .nav-item.active {
   background: var(--green-soft);
   border-color: var(--green-border);
@@ -525,7 +517,7 @@ img {
   color: var(--faint);
 }
 .header-search {
-  margin-left: auto;
+  margin-left: 0;
   width: 220px;
   flex: 0 1 220px;
 }
@@ -1350,3 +1342,50 @@ img {
 
 /* Tumblr-native ask iframe (verify size on the live /ask route). */
 .tumblr-ask-iframe { display: block; width: 100%; min-height: 260px; border: 0; }
+
+/* Sims-like status readout: compact enough for short browser windows. */
+.needs-panel {
+  padding: 10px 11px 11px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.needs-heading {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  color: var(--green);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.needs-heading .ti { font-size: 13px; }
+.need-row {
+  display: grid;
+  grid-template-columns: 48px minmax(0,1fr);
+  align-items: center;
+  gap: 8px;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1;
+}
+.need-meter {
+  width: 100%;
+  height: 8px;
+  padding: 1px;
+  background: var(--window);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.need-fill { display: block; height: 100%; max-width: 100%; border-radius: 1px; background: var(--green); }
+.need-energy { background: #b5bb94; }
+.need-nicotine { background: var(--lavender); }
+.music-widget-rail { padding: 15px 14px; }
+.music-widget-rail .music-label { display: flex; align-items: center; gap: 5px; }
+.music-widget-rail .music-label .ti { font-size: 13px; }
+.music-widget-rail .music-art .ti { font-size: 20px; }
+.music-widget-rail .music-track { margin-top: 12px; }
+.profile p { white-space: pre-line; }

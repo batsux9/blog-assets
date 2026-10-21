@@ -9,11 +9,11 @@
   <meta name="description" content="Preview">
   <link rel="icon" href="../assets/icons/plumbob.svg">
   <link rel="alternate" type="application/rss+xml" href="#">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.49.0/dist/tabler-icons.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400..700&family=Inter:wght@400..700&display=swap" rel="stylesheet">
   <style>
-/* The CSS below is generated from src/theme.css. Edit there, then run build.py. */
 /* Lullabytown — Sims 2-inspired Tumblr prototype.
    Edit the design tokens in :root first. Styles are kept in component groups;
    responsive adjustments are collected near the end. */
@@ -248,36 +248,22 @@ img {
   display: flex;
   gap: 4px;
   align-items: center;
-  margin-left: 0;
-  align-self: flex-start;
-  padding-top: 7px;
+  margin-left: auto;
+  align-self: center;
+  padding-top: 0;
   opacity: 0.75;
 }
 .window-controls span {
+  display: grid;
+  place-items: center;
   width: 17px;
   height: 15px;
   background: rgba(102, 124, 163, 0.28);
   border: 1px solid var(--border);
   border-radius: 2px;
   color: var(--muted);
-  text-align: center;
-  line-height: 12px;
-  font-family: var(--font-mono);
-  font-size: 13px;
 }
-.window-min::after {
-  content: "_";
-  position: relative;
-  top: -3px;
-}
-.window-max::after {
-  content: "□";
-  position: relative;
-  top: -2px;
-}
-.window-controls .window-close {
-  font-size: 13px;
-}
+.window-controls .ti { font-size: 11px; line-height: 1; }
 .mobile-menu {
   display: none !important;
 }
@@ -352,12 +338,18 @@ img {
     background 0.14s,
     border-color 0.14s;
 }
-.nav-item img {
+.nav-item > .ti {
+  display: grid;
+  place-items: center;
   width: 30px;
   height: 30px;
-  object-fit: contain;
   flex: 0 0 30px;
+  color: var(--muted);
+  font-size: 24px;
+  line-height: 1;
 }
+.nav-item.active > .ti,
+.nav-item:hover > .ti { color: var(--text); }
 .nav-item.active {
   background: var(--green-soft);
   border-color: var(--green-border);
@@ -541,7 +533,7 @@ img {
   color: var(--faint);
 }
 .header-search {
-  margin-left: auto;
+  margin-left: 0;
   width: 220px;
   flex: 0 1 220px;
 }
@@ -1367,8 +1359,54 @@ img {
 /* Tumblr-native ask iframe (verify size on the live /ask route). */
 .tumblr-ask-iframe { display: block; width: 100%; min-height: 260px; border: 0; }
 
+/* Sims-like status readout: compact enough for short browser windows. */
+.needs-panel {
+  padding: 10px 11px 11px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.needs-heading {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  color: var(--green);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.needs-heading .ti { font-size: 13px; }
+.need-row {
+  display: grid;
+  grid-template-columns: 48px minmax(0,1fr);
+  align-items: center;
+  gap: 8px;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1;
+}
+.need-meter {
+  width: 100%;
+  height: 8px;
+  padding: 1px;
+  background: var(--window);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.need-fill { display: block; height: 100%; max-width: 100%; border-radius: 1px; background: var(--green); }
+.need-energy { background: #b5bb94; }
+.need-nicotine { background: var(--lavender); }
+.music-widget-rail { padding: 15px 14px; }
+.music-widget-rail .music-label { display: flex; align-items: center; gap: 5px; }
+.music-widget-rail .music-label .ti { font-size: 13px; }
+.music-widget-rail .music-art .ti { font-size: 20px; }
+.music-widget-rail .music-track { margin-top: 12px; }
+.profile p { white-space: pre-line; }
 
-  </style>
+</style>
 </head>
 <body>
   <!-- Reference icons. Links are replaced with Tumblr-hosted asset URLs at build time. -->
@@ -1391,7 +1429,7 @@ img {
         <input type="search" name="q" placeholder="search this blog" aria-label="Search this blog" value="">
       </form>
       <div aria-label="Decorative window controls" class="window-controls">
-        <span class="window-min"></span><span class="window-max"></span><span class="window-close">×</span>
+        <span class="window-min"><i class="ti ti-minus" aria-hidden="true"></i></span><span class="window-max"><i class="ti ti-square" aria-hidden="true"></i></span><span class="window-close"><i class="ti ti-x" aria-hidden="true"></i></span>
       </div>
       <button class="mobile-menu icon-button" id="menuButton" aria-label="Open menu" aria-expanded="false" type="button"><svg class="stroke-icon" aria-hidden="true"><use href="#i-menu"/></svg></button>
     </header>
@@ -1404,22 +1442,24 @@ img {
           <p>a little corner of the internet for thoughts, screenshots and things i like.</p>
           <p class="profile-interests">sims, pixels, design,<br>and everyday life.</p>
         </section>
+                
+        <section class="needs-panel" aria-label="Personal needs">
+          <div class="needs-heading"><i class="ti ti-heartbeat" aria-hidden="true"></i> needs</div>
+          <div class="need-row"><span>hunger</span><div class="need-meter" role="meter" aria-label="Hunger" aria-valuemin="0" aria-valuemax="100" aria-valuenow="78"><span class="need-fill need-hunger" style="width:clamp(0%, 78%, 100%)"></span></div></div>
+          <div class="need-row"><span>energy</span><div class="need-meter" role="meter" aria-label="Energy" aria-valuemin="0" aria-valuemax="100" aria-valuenow="52"><span class="need-fill need-energy" style="width:clamp(0%, 52%, 100%)"></span></div></div>
+          <div class="need-row"><span>nicotine</span><div class="need-meter" role="meter" aria-label="Nicotine" aria-valuemin="0" aria-valuemax="100" aria-valuenow="24"><span class="need-fill need-nicotine" style="width:clamp(0%, 24%, 100%)"></span></div></div>
+        </section>
+        
         <nav class="side-nav" aria-label="Blog navigation">
-          <a class="nav-item active" href="/"><img alt="" src="../assets/icons/home.svg"><span>home</span></a>
-          <a class="nav-item" href="/ask"><img alt="" src="../assets/icons/ask.svg"><span>message</span></a>
-          <!-- Create /downloads and /resources as Tumblr custom-layout pages later. -->
-          <a class="nav-item" href="/downloads"><img alt="" src="../assets/icons/downloads.svg"><span>downloads</span></a>
-          <a class="nav-item" href="/resources"><img alt="" src="../assets/icons/resources.svg"><span>resources</span></a>
-          <a class="nav-item" href="/archive"><img alt="" src="../assets/icons/archive.svg"><span>archive</span></a>
+          <a class="nav-item active" href="/"><i class="ti ti-home" aria-hidden="true"></i><span>home</span></a>
+          <a class="nav-item" href="/ask"><i class="ti ti-message-circle" aria-hidden="true"></i><span>message</span></a>
+          <a class="nav-item" href="/downloads"><i class="ti ti-download" aria-hidden="true"></i><span>downloads</span></a>
+          <a class="nav-item" href="/resources"><i class="ti ti-books" aria-hidden="true"></i><span>resources</span></a>
+
+          <a class="nav-item" href="/archive"><i class="ti ti-archive" aria-hidden="true"></i><span>archive</span></a>
         </nav>
         <div class="sidebar-bottom">
-          <div class="sidebar-note music-widget" aria-label="Music currently on rotation">
-            <div class="music-label">♫ on rotation</div>
-            <div class="music-track">
-              <div class="music-art" aria-hidden="true">♫</div>
-              <div class="music-info"><strong>Teardrop</strong><span>Massive Attack</span></div>
-            </div>
-          </div>
+
           <div class="sidebar-bottom-row"><span>made for slow internet days</span><button aria-label="Switch color theme" class="theme-button" id="themeButton" title="Toggle dark / light" type="button"><svg class="stroke-icon" aria-hidden="true"><use href="#i-sun"/></svg></button></div>
         </div>
       </aside>
@@ -1461,16 +1501,15 @@ img {
             <figcaption><span class="feature-kicker">current save</span><strong>little moments in my game</strong></figcaption>
           </figure>
         </section>
-        <section class="rail-panel tags-panel">
-          <div class="rail-head"><span class="little-star">✳</span> browse posts</div>
-          <div class="tag-list">
-            <a class="tag-pill hot" href="/tagged/sims">#sims</a>
-            <a class="tag-pill" href="/tagged/screenshots">#screenshots</a>
-            <a class="tag-pill" href="/tagged/gameplay">#gameplay</a>
-            <a class="tag-pill" href="/tagged/interface">#interface</a>
-            <a class="tag-pill" href="/tagged/photography">#photography</a>
+        
+        <section class="rail-panel music-widget music-widget-rail" aria-label="Music currently on rotation">
+          <div class="music-label"><i class="ti ti-music" aria-hidden="true"></i> on rotation</div>
+          <div class="music-track">
+            <div class="music-art" aria-hidden="true"><i class="ti ti-music"></i></div>
+            <div class="music-info"><strong>Teardrop</strong><span>Massive Attack</span></div>
           </div>
         </section>
+        
         <div class="rail-decoration"><img src="../assets/icons/plumbob.svg" alt=""><span>see you in pleasantview</span></div>
       </aside>
     </div>

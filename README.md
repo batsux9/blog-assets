@@ -49,3 +49,16 @@ build.py            Single-file theme builder (Python 3)
 - Build custom-layout Downloads and Resources pages
 
 [Theme documentation](https://www.tumblr.com/docs/en/custom_themes) · [NPF specification](https://github.com/tumblr/docs/blob/master/npf-spec.md)
+
+## Customizer controls — v0.2
+
+The theme follows the free-text icon-field pattern used by [Seyche's Lilac theme](https://github.com/seyche/tumblr-themes/blob/master/theme%20nine%3A%20lilac), adapted to the [Tabler webfont](https://tabler.io/icons) (3.49.0 via jsDelivr): enter icon **names** such as `home`, `books`, `download` without any prefix. No dropdown or icon asset is needed for the navigation.
+
+- **Profile Heading**, **Profile Bio**, **Profile Interests**: three independent text fields. Tumblr provides the profile picture.
+- **Show Message** (also requires Ask enabled in the blog) and **Show Archive**: separate toggles.
+- **Home/Message/Archive Label + Icon**: text inputs for default navigation links.
+- **Custom Link 1/2/3**: each has a link title, URL and icon input. Like Lilac, clearing the title hides its slot. The first two default to Downloads and Resources; the third starts empty. Create target Tumblr pages separately.
+- **Show Needs** plus **Need Hunger/Energy/Nicotine**: compact decorative Sims-like meters between the profile and the navigation. Text values from 0 to 100; non-interactive.
+- **Show Music Widget**, **Music Track**, **Music Artist**: decorative right-rail track card replacing the formerly hardcoded "Browse Posts" tags.
+
+**Working process:** after editing source in GitHub, rerun `python build.py` and paste the newly generated `dist/theme.html` into Tumblr's HTML editor. A repository change does not automatically update the live blog. Note: `dist/local-preview.html` is a static snapshot, not a Tumblr renderer.

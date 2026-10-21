@@ -12,6 +12,34 @@
   <!-- Tumblr Customizer: wallpaper and optional right-rail screenshot -->
   <meta name="image:Wallpaper" content="">
   <meta name="image:Featured Screenshot" content="">
+  <meta name="if:Show Message" content="1">
+  <meta name="if:Show Archive" content="1">
+  <meta name="if:Show Needs" content="1">
+  <meta name="if:Show Music Widget" content="1">
+  <meta name="text:Profile Heading" content="hi, it's batsu">
+  <meta name="text:Profile Bio" content="a little corner of the internet for thoughts, screenshots and things i like.">
+  <meta name="text:Profile Interests" content="sims, pixels, design, and everyday life.">
+  <meta name="text:Need Hunger" content="78">
+  <meta name="text:Need Energy" content="52">
+  <meta name="text:Need Nicotine" content="24">
+  <meta name="text:Music Track" content="Teardrop">
+  <meta name="text:Music Artist" content="Massive Attack">
+  <meta name="text:Home Icon" content="home">
+  <meta name="text:Home Label" content="home">
+  <meta name="text:Message Icon" content="message-circle">
+  <meta name="text:Message Label" content="message">
+  <meta name="text:Archive Icon" content="archive">
+  <meta name="text:Archive Label" content="archive">
+  <meta name="text:Custom Link 1" content="downloads">
+  <meta name="text:Custom Link 1 URL" content="/downloads">
+  <meta name="text:Custom Link 1 Icon" content="download">
+  <meta name="text:Custom Link 2" content="resources">
+  <meta name="text:Custom Link 2 URL" content="/resources">
+  <meta name="text:Custom Link 2 Icon" content="books">
+  <meta name="text:Custom Link 3" content="">
+  <meta name="text:Custom Link 3 URL" content="">
+  <meta name="text:Custom Link 3 Icon" content="link">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.49.0/dist/tabler-icons.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400..700&family=Inter:wght@400..700&display=swap" rel="stylesheet">
@@ -41,7 +69,7 @@ __INLINE_CSS__
         <input type="search" name="q" placeholder="search this blog" aria-label="Search this blog" value="{SearchQuery}">
       </form>
       <div aria-label="Decorative window controls" class="window-controls">
-        <span class="window-min"></span><span class="window-max"></span><span class="window-close">×</span>
+        <span class="window-min"><i class="ti ti-minus" aria-hidden="true"></i></span><span class="window-max"><i class="ti ti-square" aria-hidden="true"></i></span><span class="window-close"><i class="ti ti-x" aria-hidden="true"></i></span>
       </div>
       <button class="mobile-menu icon-button" id="menuButton" aria-label="Open menu" aria-expanded="false" type="button"><svg class="stroke-icon" aria-hidden="true"><use href="#i-menu"/></svg></button>
     </header>
@@ -50,26 +78,27 @@ __INLINE_CSS__
       <aside class="sidebar" id="sidebar">
         <section class="profile">
           <div class="profile-illustration"><img alt="Blog avatar" src="{PortraitURL-128}"></div>
-          <h1>hi, it's batsu <span class="small-heart">♡</span></h1>
-          <p>a little corner of the internet for thoughts, screenshots and things i like.</p>
-          <p class="profile-interests">sims, pixels, design,<br>and everyday life.</p>
+          <h1>{text:Profile Heading} <span class="small-heart">♡</span></h1>
+          <p>{text:Profile Bio}</p>
+          <p class="profile-interests">{text:Profile Interests}</p>
         </section>
+        {block:IfShowNeeds}
+        <section class="needs-panel" aria-label="Personal needs">
+          <div class="needs-heading"><i class="ti ti-heartbeat" aria-hidden="true"></i> needs</div>
+          <div class="need-row"><span>hunger</span><div class="need-meter" role="meter" aria-label="Hunger" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{text:Need Hunger}"><span class="need-fill need-hunger" style="width:clamp(0%, {text:Need Hunger}%, 100%)"></span></div></div>
+          <div class="need-row"><span>energy</span><div class="need-meter" role="meter" aria-label="Energy" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{text:Need Energy}"><span class="need-fill need-energy" style="width:clamp(0%, {text:Need Energy}%, 100%)"></span></div></div>
+          <div class="need-row"><span>nicotine</span><div class="need-meter" role="meter" aria-label="Nicotine" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{text:Need Nicotine}"><span class="need-fill need-nicotine" style="width:clamp(0%, {text:Need Nicotine}%, 100%)"></span></div></div>
+        </section>
+        {/block:IfShowNeeds}
         <nav class="side-nav" aria-label="Blog navigation">
-          <a class="nav-item {block:IndexPage}active{/block:IndexPage}" href="/"><img alt="" src="__ASSET_HOME__"><span>home</span></a>
-          {block:AskEnabled}<a class="nav-item" href="/ask"><img alt="" src="__ASSET_ASK__"><span>message</span></a>{/block:AskEnabled}
-          <!-- Create /downloads and /resources as Tumblr custom-layout pages later. -->
-          <a class="nav-item" href="/downloads"><img alt="" src="__ASSET_DOWNLOADS__"><span>downloads</span></a>
-          <a class="nav-item" href="/resources"><img alt="" src="__ASSET_RESOURCES__"><span>resources</span></a>
-          <a class="nav-item" href="/archive"><img alt="" src="__ASSET_ARCHIVE__"><span>archive</span></a>
+          <a class="nav-item {block:IndexPage}active{/block:IndexPage}" href="/"><i class="ti ti-{text:Home Icon}" aria-hidden="true"></i><span>{text:Home Label}</span></a>
+          {block:AskEnabled}{block:IfShowMessage}<a class="nav-item" href="/ask"><i class="ti ti-{text:Message Icon}" aria-hidden="true"></i><span>{text:Message Label}</span></a>{/block:IfShowMessage}{/block:AskEnabled}
+          {block:IfCustomLink1}<a class="nav-item" href="{text:Custom Link 1 URL}"><i class="ti ti-{text:Custom Link 1 Icon}" aria-hidden="true"></i><span>{text:Custom Link 1}</span></a>{/block:IfCustomLink1}
+          {block:IfCustomLink2}<a class="nav-item" href="{text:Custom Link 2 URL}"><i class="ti ti-{text:Custom Link 2 Icon}" aria-hidden="true"></i><span>{text:Custom Link 2}</span></a>{/block:IfCustomLink2}
+          {block:IfCustomLink3}<a class="nav-item" href="{text:Custom Link 3 URL}"><i class="ti ti-{text:Custom Link 3 Icon}" aria-hidden="true"></i><span>{text:Custom Link 3}</span></a>{/block:IfCustomLink3}
+          {block:IfShowArchive}<a class="nav-item" href="/archive"><i class="ti ti-{text:Archive Icon}" aria-hidden="true"></i><span>{text:Archive Label}</span></a>{/block:IfShowArchive}
         </nav>
         <div class="sidebar-bottom">
-          <div class="sidebar-note music-widget" aria-label="Music currently on rotation">
-            <div class="music-label">♫ on rotation</div>
-            <div class="music-track">
-              <div class="music-art" aria-hidden="true">♫</div>
-              <div class="music-info"><strong>Teardrop</strong><span>Massive Attack</span></div>
-            </div>
-          </div>
           <div class="sidebar-bottom-row"><span>made for slow internet days</span><button aria-label="Switch color theme" class="theme-button" id="themeButton" title="Toggle dark / light" type="button"><svg class="stroke-icon" aria-hidden="true"><use href="#i-sun"/></svg></button></div>
         </div>
       </aside>
@@ -184,16 +213,15 @@ __INLINE_CSS__
           </figure>
         </section>
         {/block:IfFeaturedScreenshot}
-        <section class="rail-panel tags-panel">
-          <div class="rail-head"><span class="little-star">✳</span> browse posts</div>
-          <div class="tag-list">
-            <a class="tag-pill hot" href="/tagged/sims">#sims</a>
-            <a class="tag-pill" href="/tagged/screenshots">#screenshots</a>
-            <a class="tag-pill" href="/tagged/gameplay">#gameplay</a>
-            <a class="tag-pill" href="/tagged/interface">#interface</a>
-            <a class="tag-pill" href="/tagged/photography">#photography</a>
+        {block:IfShowMusicWidget}
+        <section class="rail-panel music-widget music-widget-rail" aria-label="Music currently on rotation">
+          <div class="music-label"><i class="ti ti-music" aria-hidden="true"></i> on rotation</div>
+          <div class="music-track">
+            <div class="music-art" aria-hidden="true"><i class="ti ti-music"></i></div>
+            <div class="music-info"><strong>{text:Music Track}</strong><span>{text:Music Artist}</span></div>
           </div>
         </section>
+        {/block:IfShowMusicWidget}
         <div class="rail-decoration"><img src="__ASSET_PLUMBOB__" alt=""><span>see you in pleasantview</span></div>
       </aside>
     </div>
