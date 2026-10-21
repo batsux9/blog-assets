@@ -68,7 +68,7 @@ The preview helper `make_preview.py` refreshes the **CSS and JS inside the check
 ## UI polish (October 2026)
 
 - Flat, **decorative** music player with shared titlebar/card design; its transport and volume controls intentionally do not play audio. The plumbob is centered on the slider.
-- Sidebar navigation uses the current filled/isometric SVG art in `assets/icons/`. The optional third custom link still accepts a Tabler icon name.
+- Sidebar navigation uses **filled Tabler webfont icons** (`.nav-filled`), while the rest of the UI retains outline Tabler. Player transport controls use the same filled font. The optional third custom link still accepts an outline Tabler icon name.
 - Sticky desktop sidebars have viewport-height **footer zones**; at very short screen heights, normal browser scrolling takes over. Vertical separators are drawn by `.main-panel`, not by sticky sidebars.
 - The right-side plumbob + **theme info** is one link to this GitHub repository.
 - Tumblr Theme Options → **Main Font Size**: `13`, `13.5`, `14`, `14.5` (default), `15`. This scales primary body/post/sidebar text and related metadata while leaving decorative titlebar and control icon sizes stable.

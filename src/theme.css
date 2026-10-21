@@ -324,6 +324,33 @@ img {
     background 0.14s,
     border-color 0.14s;
 }
+/* True Tabler filled glyphs, used only for navigation and player transport.
+   The regular Tabler stylesheet stays in place for all other outline icons.
+   Unicode values correspond to v3.49.0 icons/filled/*.svg metadata. */
+@font-face {
+  font-family: "tabler-icons-filled";
+  src: url("https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.49.0/dist/fonts/tabler-icons-filled.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+.ti.nav-filled::before,
+.ti.player-filled::before {
+  font-family: "tabler-icons-filled" !important;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  line-height: 1;
+}
+.ti.nav-filled.ti-home::before { content: "\\102b3"; }
+.ti.nav-filled.ti-message-circle::before { content: "\\fecf"; }
+.ti.nav-filled.ti-download::before { content: "\\101dc"; }
+.ti.nav-filled.ti-book::before { content: "\\fa87"; }
+.ti.nav-filled.ti-archive::before { content: "\\fa82"; }
+.ti.player-filled.ti-player-track-prev::before { content: "\\f697"; }
+.ti.player-filled.ti-player-pause::before { content: "\\f690"; }
+.ti.player-filled.ti-player-track-next::before { content: "\\f696"; }
+
 .nav-item > .ti {
   display: grid;
   place-items: center;

@@ -371,6 +371,33 @@ img {
     background 0.14s,
     border-color 0.14s;
 }
+/* True Tabler filled glyphs, used only for navigation and player transport.
+   The regular Tabler stylesheet stays in place for all other outline icons.
+   Unicode values correspond to v3.49.0 icons/filled/*.svg metadata. */
+@font-face {
+  font-family: "tabler-icons-filled";
+  src: url("https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.49.0/dist/fonts/tabler-icons-filled.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+.ti.nav-filled::before,
+.ti.player-filled::before {
+  font-family: "tabler-icons-filled" !important;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  line-height: 1;
+}
+.ti.nav-filled.ti-home::before { content: "\\102b3"; }
+.ti.nav-filled.ti-message-circle::before { content: "\\fecf"; }
+.ti.nav-filled.ti-download::before { content: "\\101dc"; }
+.ti.nav-filled.ti-book::before { content: "\\fa87"; }
+.ti.nav-filled.ti-archive::before { content: "\\fa82"; }
+.ti.player-filled.ti-player-track-prev::before { content: "\\f697"; }
+.ti.player-filled.ti-player-pause::before { content: "\\f690"; }
+.ti.player-filled.ti-player-track-next::before { content: "\\f696"; }
+
 .nav-item > .ti {
   display: grid;
   place-items: center;
@@ -1607,12 +1634,12 @@ img {
         </section>
         {/block:IfShowNeeds}
         <nav class="side-nav" aria-label="Blog navigation">
-          <a class="nav-item {block:IndexPage}active{/block:IndexPage}" href="/"><img src="https://raw.githubusercontent.com/batsux9/blog-assets/main/assets/icons/home.svg" alt="" aria-hidden="true"><span>{text:Home Label}</span></a>
-          {block:AskEnabled}{block:IfShowMessage}<a class="nav-item" href="/ask"><img src="https://raw.githubusercontent.com/batsux9/blog-assets/main/assets/icons/ask.svg" alt="" aria-hidden="true"><span>{text:Message Label}</span></a>{/block:IfShowMessage}{/block:AskEnabled}
-          {block:IfCustomLink1}<a class="nav-item" href="{text:Custom Link 1 URL}"><img src="https://raw.githubusercontent.com/batsux9/blog-assets/main/assets/icons/downloads.svg" alt="" aria-hidden="true"><span>{text:Custom Link 1}</span></a>{/block:IfCustomLink1}
-          {block:IfCustomLink2}<a class="nav-item" href="{text:Custom Link 2 URL}"><img src="https://raw.githubusercontent.com/batsux9/blog-assets/main/assets/icons/resources.svg" alt="" aria-hidden="true"><span>{text:Custom Link 2}</span></a>{/block:IfCustomLink2}
+          <a class="nav-item {block:IndexPage}active{/block:IndexPage}" href="/"><i class="ti ti-home nav-filled" aria-hidden="true"></i><span>{text:Home Label}</span></a>
+          {block:AskEnabled}{block:IfShowMessage}<a class="nav-item" href="/ask"><i class="ti ti-message-circle nav-filled" aria-hidden="true"></i><span>{text:Message Label}</span></a>{/block:IfShowMessage}{/block:AskEnabled}
+          {block:IfCustomLink1}<a class="nav-item" href="{text:Custom Link 1 URL}"><i class="ti ti-download nav-filled" aria-hidden="true"></i><span>{text:Custom Link 1}</span></a>{/block:IfCustomLink1}
+          {block:IfCustomLink2}<a class="nav-item" href="{text:Custom Link 2 URL}"><i class="ti ti-book nav-filled" aria-hidden="true"></i><span>{text:Custom Link 2}</span></a>{/block:IfCustomLink2}
           {block:IfCustomLink3}<a class="nav-item" href="{text:Custom Link 3 URL}"><i class="ti ti-{text:Custom Link 3 Icon}" aria-hidden="true"></i><span>{text:Custom Link 3}</span></a>{/block:IfCustomLink3}
-          {block:IfShowArchive}<a class="nav-item" href="/archive"><img src="https://raw.githubusercontent.com/batsux9/blog-assets/main/assets/icons/archive.svg" alt="" aria-hidden="true"><span>{text:Archive Label}</span></a>{/block:IfShowArchive}
+          {block:IfShowArchive}<a class="nav-item" href="/archive"><i class="ti ti-archive nav-filled" aria-hidden="true"></i><span>{text:Archive Label}</span></a>{/block:IfShowArchive}
         </nav>
         <div class="sidebar-bottom">
           <div class="sidebar-bottom-row"><span>made for slow internet days</span><button aria-label="Switch color theme" class="theme-button" id="themeButton" title="Toggle dark / light" type="button"><svg class="stroke-icon" aria-hidden="true"><use href="#i-sun"/></svg></button></div>
@@ -1748,9 +1775,9 @@ img {
             </div>
             <div class="player-divider"></div>
             <div class="player-controls" aria-hidden="true">
-              <span><i class="ti ti-player-track-prev-filled"></i></span>
-              <span class="is-active"><i class="ti ti-player-pause-filled"></i></span>
-              <span><i class="ti ti-player-track-next-filled"></i></span>
+              <span><i class="ti ti-player-track-prev player-filled"></i></span>
+              <span class="is-active"><i class="ti ti-player-pause player-filled"></i></span>
+              <span><i class="ti ti-player-track-next player-filled"></i></span>
             </div>
             <div class="player-slider-row" aria-hidden="true">
               <i class="ti ti-volume"></i>

@@ -340,6 +340,33 @@ img {
     background 0.14s,
     border-color 0.14s;
 }
+/* True Tabler filled glyphs, used only for navigation and player transport.
+   The regular Tabler stylesheet stays in place for all other outline icons.
+   Unicode values correspond to v3.49.0 icons/filled/*.svg metadata. */
+@font-face {
+  font-family: "tabler-icons-filled";
+  src: url("https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.49.0/dist/fonts/tabler-icons-filled.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+.ti.nav-filled::before,
+.ti.player-filled::before {
+  font-family: "tabler-icons-filled" !important;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  line-height: 1;
+}
+.ti.nav-filled.ti-home::before { content: "\\102b3"; }
+.ti.nav-filled.ti-message-circle::before { content: "\\fecf"; }
+.ti.nav-filled.ti-download::before { content: "\\101dc"; }
+.ti.nav-filled.ti-book::before { content: "\\fa87"; }
+.ti.nav-filled.ti-archive::before { content: "\\fa82"; }
+.ti.player-filled.ti-player-track-prev::before { content: "\\f697"; }
+.ti.player-filled.ti-player-pause::before { content: "\\f690"; }
+.ti.player-filled.ti-player-track-next::before { content: "\\f696"; }
+
 .nav-item > .ti {
   display: grid;
   place-items: center;
@@ -1575,12 +1602,12 @@ img {
         </section>
         
         <nav class="side-nav" aria-label="Blog navigation">
-          <a class="nav-item active" href="/"><img src="../assets/icons/home.svg" alt="" aria-hidden="true"><span>home</span></a>
-          <a class="nav-item" href="/ask"><img src="../assets/icons/ask.svg" alt="" aria-hidden="true"><span>message</span></a>
-          <a class="nav-item" href="/downloads"><img src="../assets/icons/downloads.svg" alt="" aria-hidden="true"><span>downloads</span></a>
-          <a class="nav-item" href="/resources"><img src="../assets/icons/resources.svg" alt="" aria-hidden="true"><span>resources</span></a>
+          <a class="nav-item active" href="/"><i class="ti ti-home nav-filled" aria-hidden="true"></i><span>home</span></a>
+          <a class="nav-item" href="/ask"><i class="ti ti-message-circle nav-filled" aria-hidden="true"></i><span>message</span></a>
+          <a class="nav-item" href="/downloads"><i class="ti ti-download nav-filled" aria-hidden="true"></i><span>downloads</span></a>
+          <a class="nav-item" href="/resources"><i class="ti ti-book nav-filled" aria-hidden="true"></i><span>resources</span></a>
 
-          <a class="nav-item" href="/archive"><img src="../assets/icons/archive.svg" alt="" aria-hidden="true"><span>archive</span></a>
+          <a class="nav-item" href="/archive"><i class="ti ti-archive nav-filled" aria-hidden="true"></i><span>archive</span></a>
         </nav>
         <div class="sidebar-bottom">
 
@@ -1644,9 +1671,9 @@ img {
             </div>
             <div class="player-divider"></div>
             <div class="player-controls" aria-hidden="true">
-              <span><i class="ti ti-player-track-prev-filled"></i></span>
-              <span class="is-active"><i class="ti ti-player-pause-filled"></i></span>
-              <span><i class="ti ti-player-track-next-filled"></i></span>
+              <span><i class="ti ti-player-track-prev player-filled"></i></span>
+              <span class="is-active"><i class="ti ti-player-pause player-filled"></i></span>
+              <span><i class="ti ti-player-track-next player-filled"></i></span>
             </div>
             <div class="player-slider-row" aria-hidden="true">
               <i class="ti ti-volume"></i>
