@@ -1,0 +1,1514 @@
+<!doctype html>
+<!-- little world of batsu — Tumblr template v0.1 (2026) -->
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#222c3b">
+  <title>little world of batsu — # — search:  —  — local visual preview</title>
+  <meta name="description" content="Preview">
+  <link rel="icon" href="../assets/icons/plumbob.svg">
+  <link rel="alternate" type="application/rss+xml" href="#">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400..700&family=Inter:wght@400..700&display=swap" rel="stylesheet">
+  <style>
+/* The CSS below is generated from src/theme.css. Edit there, then run build.py. */
+/* Lullabytown — Sims 2-inspired Tumblr prototype.
+   Edit the design tokens in :root first. Styles are kept in component groups;
+   responsive adjustments are collected near the end. */
+:root {
+  /* Font families */
+  --font: "Inter", sans-serif;
+  --font-mono: "Geist Mono", monospace;
+  --font-reading: var(--font);
+  --font-display: var(--font);
+
+  /* Post typography */
+  --post-text-size: 14.5px;
+  --post-line-height: 1.55;
+  --post-h1-size: 1.5em;
+  --post-h2-size: 1.35em;
+  --post-h3-size: 1.12em;
+
+  /* Colors */
+  color-scheme: dark;
+  --canvas: #181f2b;
+  --window: #222c3b;
+  --titlebar: #263247;
+  --sidebar: #222c3b;
+  --card: #273243;
+  --card-quiet: #2a3547;
+  --card-soft: #303d50;
+  --border: #43516b;
+  --line: #3b485d;
+  --text: #e1e9f7;
+  --muted: #a9bad1;
+  --faint: #879ab6;
+  --green: #aed58b;
+  --green-dark: #4c6f55;
+  --green-soft: #385249;
+  --green-border: #719676;
+  --blue-soft: #364762;
+  --blue-pill: #364461;
+  --lavender: #c2bbe7;
+  --image-bg: #1c2431;
+  --shadow: 0 24px 64px rgba(3, 7, 15, 0.55), 0 0 0 1px rgba(6, 13, 26, 0.45);
+  --radius: 10px;
+  --wallpaper-overlay: rgba(10, 18, 32, 0.38);
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --canvas: #dce2ea;
+  --window: #e3e7f0;
+  --titlebar: #d3ddef;
+  --sidebar: #e2e7f0;
+  --card: #f1f3f8;
+  --card-quiet: #e9edf5;
+  --card-soft: #e0e9f1;
+  --border: #a4b4cc;
+  --line: #becbdb;
+  --text: #293652;
+  --muted: #516784;
+  --faint: #657995;
+  --green: #557e3e;
+  --green-dark: #c5d9b4;
+  --green-soft: #d3e1ca;
+  --green-border: #91ac7e;
+  --blue-soft: #d7e0f2;
+  --blue-pill: #dce4f3;
+  --lavender: #776994;
+  --image-bg: #c7d5e3;
+  --wallpaper-overlay: rgba(23, 35, 52, 0.27);
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  min-width: 320px;
+  background-color: var(--canvas);
+  background-image:
+    linear-gradient(var(--wallpaper-overlay), var(--wallpaper-overlay)),
+    url("../assets/images/neighborhood-night.webp");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+button,
+input,
+textarea {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: var(--green);
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+[hidden] {
+  display: none !important;
+}
+.icon-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+.stroke-icon {
+  height: 19px;
+  width: 19px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* The page wallpaper intentionally stays outside the solid app-style window. */
+.ambient {
+  display: none;
+}
+.site-shell {
+  max-width: 1150px;
+  margin: 28px auto 60px;
+  background: var(--window);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.titlebar {
+  height: 59px;
+  display: flex;
+  align-items: center;
+  padding: 0 15px 0 19px;
+  background: var(--titlebar);
+  border-bottom: 1px solid var(--border);
+  gap: 22px;
+  position: relative;
+}
+.titlebar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-right: 0;
+  min-width: 0;
+  white-space: nowrap;
+}
+.brand > img {
+  width: 22px;
+  height: 33px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 1px 0 #0e1621);
+}
+.brand-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+.brand-title {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+.brand-subtitle {
+  margin-left: 0;
+  color: var(--faint);
+  font-size: 11px;
+  line-height: 1.2;
+  letter-spacing: 0.2px;
+}
+.topnav {
+  display: flex;
+  height: 100%;
+  gap: 5px;
+  align-items: stretch;
+}
+.topnav-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.topnav-link.active {
+  color: var(--text);
+}
+.topnav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 13px;
+  right: 13px;
+  height: 2px;
+  background: var(--green);
+  border-radius: 2px;
+}
+.window-controls {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  margin-left: 0;
+  align-self: flex-start;
+  padding-top: 7px;
+  opacity: 0.75;
+}
+.window-controls span {
+  width: 17px;
+  height: 15px;
+  background: rgba(102, 124, 163, 0.28);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--muted);
+  text-align: center;
+  line-height: 12px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+.window-min::after {
+  content: "_";
+  position: relative;
+  top: -3px;
+}
+.window-max::after {
+  content: "□";
+  position: relative;
+  top: -2px;
+}
+.window-controls .window-close {
+  font-size: 13px;
+}
+.mobile-menu {
+  display: none !important;
+}
+.shell-content {
+  display: grid;
+  grid-template-columns: 226px minmax(0, 1fr) 260px;
+  align-items: stretch;
+  min-height: calc(100vh - 190px);
+}
+.sidebar {
+  background: var(--sidebar);
+  border-right: 1px solid var(--border);
+  padding: 22px 15px 19px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.profile-illustration {
+  aspect-ratio: 1/1;
+  background: var(--card-soft);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 7px;
+  overflow: hidden;
+  margin-bottom: 21px;
+}
+.profile-illustration img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+}
+.profile h1 {
+  margin: 0 4px 9px;
+  font-weight: 650;
+  font-size: 15px;
+  letter-spacing: -0.25px;
+  line-height: 1.3;
+}
+.profile .small-heart {
+  font-weight: 400;
+  color: var(--lavender);
+}
+.profile p {
+  margin: 0 4px 12px;
+  color: var(--muted);
+  font-size: 12.8px;
+  line-height: 1.58;
+}
+.profile .profile-interests {
+  margin-top: 9px;
+  margin-bottom: 5px;
+}
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 2px;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 46px;
+  padding: 5px 12px 5px 7px;
+  border-radius: 7px;
+  font-size: 13px;
+  border: 1px solid transparent;
+  transition:
+    background 0.14s,
+    border-color 0.14s;
+}
+.nav-item img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  flex: 0 0 30px;
+}
+.nav-item.active {
+  background: var(--green-soft);
+  border-color: var(--green-border);
+  color: var(--text);
+}
+.nav-item:hover:not(.active) {
+  background: var(--card-soft);
+  color: var(--text);
+}
+.sidebar-bottom {
+  margin-top: auto;
+  padding-top: 22px;
+}
+.sidebar-note {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  font-size: 11.8px;
+  color: var(--muted);
+  line-height: 1.6;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 2px rgba(167, 211, 144, 0.13);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+.sidebar-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 5px 0;
+  font-size: 10px;
+  color: var(--faint);
+}
+.theme-button {
+  background: transparent;
+  border: 0;
+  padding: 3px;
+  color: var(--muted);
+  border-radius: 5px;
+}
+.theme-button:hover {
+  color: var(--green);
+  background: var(--card-soft);
+}
+.theme-button .stroke-icon {
+  width: 17px;
+  height: 17px;
+}
+.main-panel {
+  min-width: 0;
+  padding: 26px 24px 40px;
+  background: var(--window);
+}
+.section-head {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 19px;
+}
+/* The post feed starts immediately; demo subpages keep their page titles. */
+.main-panel:not(.alternate) .section-head {
+  display: none;
+}
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.2px;
+  margin-bottom: 2px;
+}
+.eyebrow img {
+  width: 10px;
+  height: 16px;
+}
+.section-head h2 {
+  margin: 0;
+  font-size: 23px;
+  letter-spacing: -0.7px;
+  font-weight: 650;
+  line-height: 1.35;
+}
+.heading-star {
+  color: var(--green);
+  font-size: 15px;
+  vertical-align: 3px;
+  margin-left: 3px;
+}
+.live-pill {
+  font-size: 11px;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 99px;
+  padding: 5px 10px;
+  white-space: nowrap;
+}
+.live-pill span {
+  display: inline-block;
+  vertical-align: 1px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  margin-right: 5px;
+}
+.feed-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+  margin: 0 0 15px;
+  min-height: 35px;
+}
+.feed-tabs {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.tab {
+  border: 1px solid transparent;
+  color: var(--muted);
+  background: transparent;
+  border-radius: 7px;
+  padding: 7px 11px;
+  line-height: 1.25;
+  font-size: 12px;
+}
+.tab.active {
+  background: var(--blue-soft);
+  border-color: var(--border);
+  color: var(--text);
+}
+.tab:hover {
+  color: var(--text);
+  background: var(--card-soft);
+}
+.search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 10px;
+  min-width: 135px;
+  width: 180px;
+  height: 34px;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--faint);
+  transition: border-color 0.15s;
+}
+.search-wrap:focus-within {
+  border-color: var(--green-border);
+}
+.search-wrap .stroke-icon {
+  height: 16px;
+  width: 16px;
+  flex-shrink: 0;
+}
+.search-wrap input {
+  min-width: 0;
+  width: 100%;
+  border: 0;
+  outline: 0 !important;
+  background: transparent;
+  color: var(--text);
+  font-size: 11.5px;
+}
+.search-wrap input::placeholder {
+  color: var(--faint);
+}
+.header-search {
+  margin-left: auto;
+  width: 220px;
+  flex: 0 1 220px;
+}
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 600px;
+  margin-inline: auto;
+}
+.post-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 14px 14px 11px;
+  min-width: 0;
+  box-shadow: 0 2px 9px rgba(9, 16, 30, 0.07);
+}
+.post-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0 0 11px;
+  min-width: 0;
+  min-height: 15px;
+}
+.post-byline {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 10.5px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.tiny-plumbob {
+  width: 9px;
+  height: 14px;
+  flex: 0 0 9px;
+  margin-right: 2px;
+}
+.mid-dot {
+  color: var(--faint);
+}
+.post-tag {
+  color: var(--muted);
+}
+.post-tag:hover {
+  color: var(--green);
+}
+.icon-button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  display: inline-grid;
+  place-items: center;
+  padding: 4px;
+  color: var(--muted);
+  border-radius: 5px;
+  line-height: 1;
+}
+.icon-button:hover {
+  color: var(--green);
+  background: var(--card-soft);
+}
+.post-more {
+  padding: 0;
+  color: var(--muted);
+}
+.post-more .stroke-icon {
+  width: 20px;
+  height: 20px;
+}
+.post-cover {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.85;
+  object-fit: cover;
+  object-position: center;
+  background: var(--image-bg);
+  border-radius: 6px;
+  border: 1px solid rgba(145, 165, 200, 0.18);
+}
+.post-cover.secondary-cover {
+  aspect-ratio: 2.65;
+  object-position: center;
+}
+.post-cover.gallery-cover {
+  aspect-ratio: 3.45;
+  object-fit: fill;
+}
+.post-body {
+  margin: 10px 2px 8px;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.post-body p {
+  margin: 0;
+}
+.post-body p + p {
+  margin-top: 3px;
+}
+
+.post-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 22px;
+}
+.notes-count {
+  font-size: 12px;
+  color: var(--muted);
+}
+.post-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.post-actions .action {
+  color: var(--muted);
+  padding: 2px;
+}
+.action:hover {
+  color: var(--green);
+}
+.like-button[aria-pressed="true"] {
+  color: #dcb0cc !important;
+}
+.like-button[aria-pressed="true"] .stroke-icon {
+  fill: currentColor;
+}
+.quote-post blockquote {
+  background: linear-gradient(
+    125deg,
+    rgba(113, 148, 109, 0.28),
+    rgba(102, 148, 118, 0.14)
+  );
+  color: var(--text);
+  border: 1px solid rgba(155, 190, 151, 0.26);
+  padding: 22px 28px;
+  border-radius: 7px;
+  font-size: 17px;
+  line-height: 1.6;
+  margin: 0 0 14px;
+  font-weight: 400;
+  position: relative;
+}
+.quote-post blockquote::before {
+  content: "“";
+  color: var(--green);
+  font-size: 40px;
+  font-weight: 700;
+  position: relative;
+  top: 8px;
+  line-height: 0;
+  margin-right: 4px;
+}
+
+/* Post rich-text typography (independent from UI and short captions) */
+.post-content {
+  font-family: var(--font-reading);
+  font-size: var(--post-text-size);
+  line-height: var(--post-line-height);
+}
+.post-content h1,
+.post-content h2,
+.post-content h3 {
+  font-family: var(--font);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin: 1.6em 0 0.4em;
+}
+.post-content h1 { font-size: var(--post-h1-size); }
+.post-content h2 { font-size: var(--post-h2-size); }
+.post-content h3 { font-size: var(--post-h3-size); }
+.post-content h1:first-child { margin-top: 0; }
+.post-content p { margin: 0 0 1em; }
+/* Cancel the 3px caption spacing from .post-body p + p. */
+.post-content p + p { margin-top: 0; }
+.post-content a {
+  color: var(--green);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.post-content a:hover { color: var(--text); }
+.post-content ul,
+.post-content ol {
+  padding-left: 1.5em;
+  margin: 0.8em 0 1.2em;
+}
+.post-content li { margin-bottom: 0.3em; }
+.post-content blockquote {
+  margin: 1.3em 0;
+  padding: 12px 16px;
+  border-left: 3px solid var(--green);
+  background: var(--card-soft);
+  border-radius: 0 4px 4px 0;
+  color: var(--muted);
+}
+.post-content code {
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  background: var(--card-soft);
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+.post-content small {
+  font-size: 0.82em;
+  color: var(--muted);
+}
+.post-content > :first-child { margin-top: 0; }
+.post-content > :last-child { margin-bottom: 0; }
+
+.end-marker {
+  text-align: center;
+  color: var(--faint);
+  font-size: 11px;
+  padding: 23px 5px 3px;
+}
+.empty-state {
+  padding: 38px 20px;
+  text-align: center;
+  background: var(--card);
+  border: 1px dashed var(--border);
+  border-radius: 9px;
+  color: var(--muted);
+}
+.right-rail {
+  background: var(--sidebar);
+  border-left: 1px solid var(--border);
+  padding: 26px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+  min-width: 0;
+}
+.rail-panel {
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 9px;
+  padding: 15px 14px;
+}
+.rail-head {
+  font-size: 12.5px;
+  font-weight: 600;
+  margin-bottom: 13px;
+  letter-spacing: 0.05px;
+}
+.little-star {
+  color: var(--green);
+  margin-right: 5px;
+}
+.rail-quote {
+  padding: 17px 14px;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.7;
+  background: var(--green-soft);
+  border: 1px solid var(--green-border);
+  border-radius: 6px;
+}
+.rail-footer {
+  font-size: 11px;
+  color: var(--faint);
+  padding-top: 11px;
+  text-align: right;
+}
+.rail-footer span {
+  color: var(--lavender);
+}
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tag-pill {
+  font-size: 11px;
+  line-height: 1.3;
+  color: var(--text);
+  padding: 8px 10px;
+  background: var(--blue-pill);
+  border: 1px solid rgba(154, 169, 207, 0.15);
+  border-radius: 50px;
+}
+.tag-pill:hover {
+  border-color: var(--green-border);
+  background: var(--green-soft);
+}
+.tag-pill.hot {
+  background: var(--green-soft);
+  border-color: var(--green-border);
+}
+.tag-pill.selected {
+  outline: 1px solid var(--green);
+  background: var(--green-soft);
+}
+.detail-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.detail-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+}
+.detail-list li:last-child {
+  padding-bottom: 0;
+  border: 0;
+}
+.detail-label {
+  font-size: 10.5px;
+  color: var(--faint);
+}
+.rail-decoration {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--faint);
+  font-size: 10px;
+  padding: 12px 0;
+}
+.rail-decoration img {
+  height: 18px;
+  width: 13px;
+  filter: grayscale(0.3);
+  opacity: 0.7;
+}
+.alt-view {
+  padding-top: 8px;
+}
+.main-panel.alternate .feed-toolbar {
+  display: none;
+}
+.alt-header {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+.alt-content {
+  padding: 22px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--text);
+  line-height: 1.75;
+  font-size: 13px;
+}
+.alt-content p {
+  margin: 0 0 13px;
+}
+.alt-content p:last-child {
+  margin-bottom: 0;
+}
+.alt-content h3 {
+  font-size: 16px;
+  margin: 0 0 11px;
+}
+.alt-content .tag-list {
+  margin-top: 10px;
+}
+.alt-content .fake-textarea {
+  display: block;
+  width: 100%;
+  min-height: 116px;
+  background: var(--window);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 12px;
+  resize: vertical;
+  border-radius: 7px;
+}
+.alt-content .fake-submit,
+.back-button {
+  border: 1px solid var(--green-border);
+  background: var(--green-soft);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 9px 13px;
+  font-size: 12px;
+  margin-top: 13px;
+}
+.back-button {
+  margin-top: 18px;
+}
+.archive-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+}
+.archive-links button {
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: var(--text);
+  background: var(--card-soft);
+  padding: 15px;
+  text-align: left;
+}
+.archive-links button:hover {
+  background: var(--green-soft);
+  border-color: var(--green-border);
+}
+.archive-links small {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 5px;
+}
+.toast {
+  position: fixed;
+  bottom: 23px;
+  left: 50%;
+  transform: translate(-50%, 15px);
+  background: #334359;
+  color: #e6eefc;
+  border: 1px solid #6a7d99;
+  border-radius: 7px;
+  box-shadow: 0 9px 35px rgba(0, 0, 0, 0.3);
+  padding: 9px 13px;
+  font-size: 12px;
+  z-index: 20;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.18s,
+    transform 0.18s;
+}
+.toast.visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+@media (max-width: 1370px) {
+  .site-shell {
+    width: calc(100% - 40px);
+    max-width: 1150px;
+    margin: 20px auto 60px;
+  }
+}
+@media (max-width: 1090px) {
+  .shell-content {
+    grid-template-columns: 218px minmax(0, 1fr);
+  }
+  .right-rail {
+    display: none;
+  }
+  .brand-subtitle {
+    display: none;
+  }
+  .main-panel {
+    padding: 24px 25px;
+  }
+}
+@media (max-width: 660px) {
+  body {
+    background-image: none;
+  }
+  .site-shell {
+    width: 100%;
+    margin: 0;
+    min-height: 100vh;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .titlebar {
+    height: 58px;
+    padding: 0 15px;
+  }
+  .brand {
+    gap: 7px;
+  }
+  .brand-title {
+    font-size: 18px;
+  }
+  .brand > img {
+    width: 18px;
+    height: 28px;
+  }
+  .topnav,
+  .window-controls {
+    display: none;
+  }
+  .mobile-menu {
+    display: grid !important;
+    margin-left: auto;
+  }
+  .shell-content {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .sidebar {
+    position: fixed;
+    top: 58px;
+    left: 0;
+    bottom: 0;
+    width: min(280px, 82vw);
+    z-index: 10;
+    transform: translateX(-101%);
+    transition: transform 0.2s;
+    box-shadow: 10px 0 26px rgba(0, 0, 0, 0.23);
+    overflow: auto;
+    border-right: 1px solid var(--border);
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  .main-panel {
+    padding: 23px 14px 30px;
+  }
+  .section-head h2 {
+    font-size: 21px;
+  }
+  .section-head {
+    margin-bottom: 13px;
+  }
+  .post-card {
+    padding: 11px 10px 9px;
+  }
+  .post-byline {
+    gap: 5px;
+    font-size: 10px;
+  }
+  .feed-toolbar {
+    gap: 7px;
+    flex-wrap: wrap;
+  }
+  .feed-tabs {
+    gap: 2px;
+  }
+  .tab {
+    padding: 8px;
+    font-size: 11px;
+  }
+  .search-wrap {
+    flex: 1;
+    min-width: 108px;
+    width: 133px;
+  }
+  .header-search {
+    display: none;
+  }
+  .post-cover {
+    aspect-ratio: 1.7;
+  }
+  .post-cover.secondary-cover {
+    aspect-ratio: 2.45;
+  }
+  .post-actions {
+    gap: 9px;
+  }
+  .quote-post blockquote {
+    font-size: 15px;
+    padding: 16px;
+  }
+  .live-pill {
+    font-size: 10px;
+  }
+  .eyebrow {
+    font-size: 10px;
+  }
+}
+@media (max-width: 470px) {
+  .link-tiles {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 390px) {
+  .post-byline a:last-child {
+    display: none;
+  }
+  .section-head-links {
+    display: none;
+  }
+  .archive-links {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+
+/* Right rail and content details (V2) */
+.featured-panel {
+  padding-bottom: 14px;
+}
+.featured-figure {
+  margin: 0;
+}
+.featured-figure img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--image-bg);
+}
+.featured-figure figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 10px;
+  line-height: 1.4;
+}
+.feature-kicker {
+  color: var(--faint);
+  font-size: 10px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+.featured-figure strong {
+  font-weight: 500;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.tags-panel .tag-list {
+  gap: 7px;
+}
+.link-tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 11px;
+  margin-top: 15px;
+}
+.link-tile {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  align-items: start;
+  gap: 4px 9px;
+  background: var(--card-soft);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 16px 13px;
+}
+.link-tile-icon {
+  grid-row: span 2;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--green);
+}
+.link-tile strong {
+  font-size: 13px;
+  font-weight: 600;
+}
+.link-tile small {
+  font-size: 11px;
+  color: var(--muted);
+  grid-column: 2;
+}
+
+/* ===== Tumblr theme integration / canonical overrides ===== */
+
+/* Original prototype: sidebar stays readable on shorter desktop viewports. */
+@media (min-width: 661px) {
+  .site-shell { overflow: clip; }
+  .sidebar, .right-rail {
+    position: sticky;
+    top: 16px;
+    align-self: start;
+  }
+}
+.profile-illustration {
+  width: min(100%, clamp(130px, 19dvh, 180px));
+  margin-inline: auto;
+}
+@media (min-width: 661px) and (max-height: 850px) {
+  .sidebar { padding-block: 14px; gap: 10px; }
+  .profile-illustration { margin-bottom: 12px; }
+  .nav-item { min-height: 40px; }
+  .side-nav { gap: 2px; }
+  .sidebar-bottom { padding-top: 10px; }
+}
+
+/* Decorative sidebar track display, intentionally not an audio player. */
+.music-widget { display: block; }
+.music-label { color: var(--green); font-size: 11px; font-weight: 600; }
+.music-track { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+.music-art {
+  display: grid;
+  place-items: center;
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  background: var(--blue-soft);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--lavender);
+  font-size: 20px;
+}
+.music-info { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.music-info strong { color: var(--text); font-size: 12px; font-weight: 600; line-height: 1.3; }
+.music-info span { color: var(--muted); font-size: 11px; line-height: 1.3; }
+
+/* Actual Tumblr post content, including content created in the NPF editor. */
+.post-card { overflow-wrap: anywhere; }
+.post-content img, .post-content video, .post-content iframe, .post-content embed {
+  max-width: 100%;
+}
+.post-content img { height: auto; }
+.post-content figure { max-width: 100%; margin: 0; }
+.post-content .npf_row {
+  display: flex;
+  width: 100%;
+  gap: 5px;
+  margin: 0.7em 0 1em;
+  align-items: stretch;
+}
+.post-content .npf_row > figure { min-width: 0; }
+.post-content .npf_row img { display: block; width: 100%; height: auto; border-radius: 4px; }
+.post-content .tmblr-full > img { display: block; width: 100%; height: auto; }
+.post-content .npf_quote { font-size: 1.15em; line-height: 1.5; }
+.post-content .npf_link, .post-content .link-card {
+  display: block; border: 1px solid var(--border); border-radius: 7px;
+  background: var(--card-soft); padding: 12px; margin: 0.8em 0;
+}
+.post-content .npf_link a { overflow-wrap: anywhere; }
+.post-content pre { max-width: 100%; overflow-x: auto; white-space: pre-wrap; }
+.post-content .tumblr_video_container, .post-content .tmblr-embed,
+.post-content .video-post iframe, .post-content .video-post video {
+  max-width: 100% !important;
+}
+.post-content .video-post, .post-content .audio-post { max-width: 100%; overflow: hidden; }
+.post-content .tumblr_video_container iframe { max-width: 100% !important; }
+.post-content p:empty { display: none; }
+.post-content > .reblog-trail:first-child { margin-top: 0; }
+.post-content .trail-entry + .trail-entry {
+  border-top: 1px solid var(--line);
+  margin-top: 18px;
+  padding-top: 18px;
+}
+.trail-author { display: flex; align-items: center; gap: 9px; margin-bottom: 12px; font-size: 12px; }
+.trail-author a { color: var(--text); text-decoration: none; overflow-wrap: anywhere; }
+.trail-author a:hover { color: var(--green); }
+.trail-author img {
+  width: 26px; height: 26px; object-fit: cover; border-radius: 6px;
+  border: 1px solid var(--border); background: var(--blue-soft);
+}
+.trail-author strong { font-weight: 600; }
+.post-text-title { font-size: 1.5em; line-height: 1.3; margin: 0 0 0.7em; }
+.post-text-title a { color: var(--text); text-decoration: none; }
+.post-text-title a:hover { color: var(--green); }
+.post-date-link { color: var(--muted); white-space: nowrap; }
+.post-byline { min-width: 0; }
+.post-tags { display: flex; flex-wrap: wrap; column-gap: 8px; row-gap: 3px; margin: 10px 2px 9px; }
+.post-tags .post-tag { font-size: 11px; }
+.post-footer { margin-top: 10px; }
+.post-actions a { display: inline-grid; place-items: center; }
+.post-actions .native-like {
+  position: relative; display: inline-grid; place-items: center;
+  width: 24px; height: 24px; color: var(--muted);
+}
+.native-like .like-button-art { pointer-events: none; width: 19px; height: 19px; }
+.native-like .like_button {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  opacity: 0; z-index: 2;
+}
+.native-like .like_button iframe { width: 100% !important; height: 100% !important; }
+.native-like:has(.like_button.liked) { color: #dcb0cc; }
+.native-like:hover { color: var(--green); }
+.post-actions .stroke-icon { width: 19px; height: 19px; }
+.post-caption { margin-top: 10px; }
+.post-media > img { display: block; width: 100%; height: auto; border-radius: 6px; }
+.post-media > iframe { max-width: 100%; }
+.post-media:empty { display: none; }
+.post-content .post-quote { background: var(--green-soft); border: 1px solid var(--green-border); border-radius: 6px; padding: 18px; }
+.post-content .ask-block { border: 1px solid var(--border); border-radius: 7px; padding: 14px; background: var(--card-soft); }
+.post-content .ask-block strong { display: block; font-size: 12px; margin-bottom: 8px; }
+.post-content .chat-lines { list-style: none; padding: 0; margin: 0; }
+.post-content .chat-lines li { padding: 8px 10px; border-bottom: 1px solid var(--line); }
+.post-content .chat-lines li:last-child { border-bottom: none; }
+.post-content .audio-post { border: 1px solid var(--border); padding: 12px; border-radius: 7px; }
+.post-content .album-art { width: 80px; height: 80px; object-fit: cover; border-radius: 5px; float: left; margin: 0 12px 8px 0; }
+
+/* Context, pagination and note lists. */
+.page-context {
+  color: var(--muted); font-size: 12px; background: var(--card);
+  border: 1px solid var(--border); border-radius: 7px; padding: 10px 12px;
+  margin: 0 0 14px;
+}
+.page-context a { color: var(--green); }
+.pagination { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin: 18px 0 0; }
+.pagination a, .pagination span {
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--muted); border: 1px solid var(--border); background: var(--card);
+  border-radius: 7px; padding: 8px 12px; font-size: 12px;
+}
+.pagination a:hover { color: var(--green); border-color: var(--green-border); }
+.pagination .current-page { color: var(--text); border-color: var(--green-border); }
+.notes-panel { margin-top: 18px; border: 1px solid var(--border); border-radius: 8px; padding: 16px; background: var(--card); }
+.notes-panel h2 { font-size: 13px; margin: 0 0 12px; }
+.notes-panel .notes { margin: 0; padding-left: 18px; font-size: 12px; color: var(--muted); }
+.notes-panel .notes li { margin: 6px 0; }
+.notes-panel .notes img.avatar { display: inline-block; vertical-align: middle; width: 20px; height: 20px; border-radius: 4px; }
+.notes-panel .notes a { color: var(--text); }
+.search-wrap { margin: 0; }
+.search-wrap button { background: none; border: none; padding: 0; color: inherit; }
+/* Hide dead/unfinished classic demo controls, which aren't used by the theme. */
+@media (max-width: 660px) {
+  .page-context { font-size: 11px; }
+  .pagination { flex-wrap: wrap; }
+}
+
+/* Tumblr-native ask iframe (verify size on the live /ask route). */
+.tumblr-ask-iframe { display: block; width: 100%; min-height: 260px; border: 0; }
+
+
+  </style>
+</head>
+<body>
+  <!-- Reference icons. Links are replaced with Tumblr-hosted asset URLs at build time. -->
+  <svg class="icon-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.9a5.5 5.5 0 0 0-7.8 0L12 5.96l-1.07-1.07a5.5 5.5 0 0 0-7.78 7.78L12 21l8.8-8.3a5.5 5.5 0 0 0 0-7.8z"/></symbol>
+    <symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4M3 11V8a2 2 0 0 1 2-2h16M7 22l-4-4 4-4m14-1v3a2 2 0 0 1-2 2H3"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-8.6 8.2 8.7 8.7 0 0 1-4.3-1.1L3 20l1.5-4.5A8 8 0 0 1 3 11.5a9 9 0 0 1 18 0z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2m10-10h-2M4 12H2m17-7-2 2M7 17l-2 2M5 5l2 2m10 10 2 2"/></symbol>
+  </svg>
+  <div class="site-shell" id="home">
+    <header class="titlebar">
+      <a class="brand" href="/" aria-label="Home">
+        <img alt="" src="../assets/icons/plumbob.svg">
+        <span class="brand-copy"><span class="brand-title">little world of batsu</span><span class="brand-subtitle">some random stuff</span></span>
+      </a>
+      <form class="search-wrap header-search" action="/search" method="get" role="search">
+        <svg class="stroke-icon" aria-hidden="true"><use href="#i-search"/></svg>
+        <input type="search" name="q" placeholder="search this blog" aria-label="Search this blog" value="">
+      </form>
+      <div aria-label="Decorative window controls" class="window-controls">
+        <span class="window-min"></span><span class="window-max"></span><span class="window-close">×</span>
+      </div>
+      <button class="mobile-menu icon-button" id="menuButton" aria-label="Open menu" aria-expanded="false" type="button"><svg class="stroke-icon" aria-hidden="true"><use href="#i-menu"/></svg></button>
+    </header>
+
+    <div class="shell-content">
+      <aside class="sidebar" id="sidebar">
+        <section class="profile">
+          <div class="profile-illustration"><img alt="A cozy house at night" src="../assets/images/avatar.png"></div>
+          <h1>hi, it's batsu <span class="small-heart">♡</span></h1>
+          <p>a little corner of the internet for thoughts, screenshots and things i like.</p>
+          <p class="profile-interests">sims, pixels, design,<br>and everyday life.</p>
+        </section>
+        <nav class="side-nav" aria-label="Blog navigation">
+          <a class="nav-item active" href="/"><img alt="" src="../assets/icons/home.svg"><span>home</span></a>
+          <a class="nav-item" href="/ask"><img alt="" src="../assets/icons/ask.svg"><span>message</span></a>
+          <!-- Create /downloads and /resources as Tumblr custom-layout pages later. -->
+          <a class="nav-item" href="/downloads"><img alt="" src="../assets/icons/downloads.svg"><span>downloads</span></a>
+          <a class="nav-item" href="/resources"><img alt="" src="../assets/icons/resources.svg"><span>resources</span></a>
+          <a class="nav-item" href="/archive"><img alt="" src="../assets/icons/archive.svg"><span>archive</span></a>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="sidebar-note music-widget" aria-label="Music currently on rotation">
+            <div class="music-label">♫ on rotation</div>
+            <div class="music-track">
+              <div class="music-art" aria-hidden="true">♫</div>
+              <div class="music-info"><strong>Teardrop</strong><span>Massive Attack</span></div>
+            </div>
+          </div>
+          <div class="sidebar-bottom-row"><span>made for slow internet days</span><button aria-label="Switch color theme" class="theme-button" id="themeButton" title="Toggle dark / light" type="button"><svg class="stroke-icon" aria-hidden="true"><use href="#i-sun"/></svg></button></div>
+        </div>
+      </aside>
+
+      <main class="main-panel" id="mainContent">
+        <div class="post-list">
+
+    <article class="post-card text">
+      <div class="post-top"><div class="post-byline"><img class="tiny-plumbob" src="../assets/icons/plumbob.svg" alt=""><span>oct 21, 2026</span></div></div>
+      <div class="post-body post-content">
+        <h2>A little corner of the internet</h2>
+        <p>Welcome to my little blog! A cozy little place for thoughts, screenshots and things I like.</p>
+        <p>Today I got completely carried away rebuilding a neighborhood in <strong>The Sims 2</strong>.</p>
+        <div class="npf_row"><figure class="tmblr-full"><img src="../assets/images/neighborhood-night.webp" alt="A cozy isometric neighborhood at night"></figure></div>
+        <p>i could get lost in this neighborhood for hours ♡</p>
+      </div>
+      <div class="post-tags"><span class="post-tag">#sims</span><span class="post-tag">#screenshots</span></div>
+      <div class="post-footer"><span class="notes-count">142 notes</span><div class="post-actions"><span class="action icon-button">↻</span><span class="action icon-button">♡</span></div></div>
+    </article>
+    <article class="post-card text">
+      <div class="post-top"><div class="post-byline"><img class="tiny-plumbob" src="../assets/icons/plumbob.svg" alt=""><span>oct 20, 2026</span></div></div>
+      <div class="post-body post-content">
+        <div class="reblog-trail">
+          <section class="trail-entry"><div class="trail-author"><img src="../assets/images/avatar.png" alt=""><strong>pleasantview-diary</strong></div><div class="trail-body"><p>spent the entire afternoon rebuilding the neighborhood 🌿</p><img src="../assets/images/sims-ui.webp" alt="A Sims game interface"></div></section>
+          <section class="trail-entry"><div class="trail-author"><img src="../assets/images/avatar.png" alt=""><strong>simblr-archive</strong></div><div class="trail-body"><p>The lighting in this screenshot is beautiful.</p></div></section>
+          <section class="trail-entry"><div class="trail-author"><img src="../assets/images/avatar.png" alt=""><strong>littleworldofbatsu</strong></div><div class="trail-body"><p>This is exactly the kind of atmosphere I've been trying to create. ♡</p></div></section>
+        </div>
+      </div>
+      <div class="post-footer"><span class="notes-count">208 notes</span></div>
+    </article>
+        </div>
+      </main>
+
+      <aside class="right-rail" aria-label="Blog widgets">
+        <section class="rail-panel featured-panel">
+          <div class="rail-head"><span class="little-star">✳</span> from my game</div>
+          <figure class="featured-figure">
+            <img src="../assets/images/sims-ui.webp" alt="A screenshot from my game">
+            <figcaption><span class="feature-kicker">current save</span><strong>little moments in my game</strong></figcaption>
+          </figure>
+        </section>
+        <section class="rail-panel tags-panel">
+          <div class="rail-head"><span class="little-star">✳</span> browse posts</div>
+          <div class="tag-list">
+            <a class="tag-pill hot" href="/tagged/sims">#sims</a>
+            <a class="tag-pill" href="/tagged/screenshots">#screenshots</a>
+            <a class="tag-pill" href="/tagged/gameplay">#gameplay</a>
+            <a class="tag-pill" href="/tagged/interface">#interface</a>
+            <a class="tag-pill" href="/tagged/photography">#photography</a>
+          </div>
+        </section>
+        <div class="rail-decoration"><img src="../assets/icons/plumbob.svg" alt=""><span>see you in pleasantview</span></div>
+      </aside>
+    </div>
+  </div>
+  <script>
+/* Theme-only interactions. Tumblr owns search, posts, likes, reblogs and pages. */
+(() => {
+  const root = document.documentElement;
+  const themeButton = document.getElementById('themeButton');
+  const menuButton = document.getElementById('menuButton');
+  const sidebar = document.getElementById('sidebar');
+  const chosen = window.localStorage.getItem('batsu-theme');
+  if (chosen === 'light' || chosen === 'dark') root.dataset.theme = chosen;
+  themeButton?.addEventListener('click', () => {
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    window.localStorage.setItem('batsu-theme', next);
+  });
+  menuButton?.addEventListener('click', () => {
+    const open = sidebar?.classList.toggle('open');
+    menuButton.setAttribute('aria-expanded', String(Boolean(open)));
+    menuButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && sidebar?.classList.contains('open')) {
+      sidebar.classList.remove('open');
+      menuButton?.setAttribute('aria-expanded', 'false');
+    }
+  });
+  document.addEventListener('click', (event) => {
+    if (!sidebar || !menuButton || !sidebar.classList.contains('open')) return;
+    if (!sidebar.contains(event.target) && !menuButton.contains(event.target)) {
+      sidebar.classList.remove('open');
+      menuButton.setAttribute('aria-expanded', 'false');
+    }
+  });
+})();
+
+  </script>
+</body>
+</html>
