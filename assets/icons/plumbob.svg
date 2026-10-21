@@ -1,1 +1,38 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 42"><path d="M14 1 26 17 14 41 2 17Z" fill="#1e342b"/><path d="M14 3 23.5 17 14 37 4.5 17Z" fill="#81b75f"/><path d="M14 3 14 37 4.5 17Z" fill="#c1e78d"/><path d="M14 19 23.5 17 14 37Z" fill="#568a46"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.19 47.45">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #1d2b23;
+      }
+
+      .cls-2 {
+        fill: #e2ffb5;
+      }
+
+      .cls-3 {
+        fill: #598c49;
+      }
+
+      .cls-4 {
+        fill: #b2df7b;
+      }
+
+      .cls-5 {
+        fill: #c4e68d;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <polygon class="cls-1" points="27.19 23.72 13.59 47.45 0 23.72 13.59 0 27.19 23.72"/>
+      <g>
+        <polygon class="cls-5" points="13.59 26.06 2.04 23.72 13.59 3.56 13.59 26.06"/>
+        <polygon class="cls-4" points="13.59 26.06 25.15 23.72 13.59 3.56 13.59 26.06"/>
+        <polygon class="cls-5" points="13.59 26.06 2.04 23.72 13.59 43.89 13.59 26.06"/>
+        <polygon class="cls-3" points="13.59 26.06 25.15 23.72 13.59 43.89 13.59 26.06"/>
+        <polygon class="cls-2" points="13.59 3.56 17.89 22.54 13.59 25.99 13.59 3.56"/>
+      </g>
+    </g>
+  </g>
+</svg>
