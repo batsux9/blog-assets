@@ -24,18 +24,19 @@
   <meta name="text:Need Nicotine" content="24">
   <meta name="text:Music Track" content="Teardrop">
   <meta name="text:Music Artist" content="Massive Attack">
-  <meta name="text:Home Icon" content="home">
+  <!-- 14.5px preserves the current look; related interface text scales proportionally. -->
+  <meta name="select:Main Font Size" content="14.5" title="14.5 (default)">
+  <meta name="select:Main Font Size" content="13" title="13">
+  <meta name="select:Main Font Size" content="13.5" title="13.5">
+  <meta name="select:Main Font Size" content="14" title="14">
+  <meta name="select:Main Font Size" content="15" title="15">
   <meta name="text:Home Label" content="home">
-  <meta name="text:Message Icon" content="message-circle">
   <meta name="text:Message Label" content="message">
-  <meta name="text:Archive Icon" content="archive">
   <meta name="text:Archive Label" content="archive">
   <meta name="text:Custom Link 1" content="downloads">
   <meta name="text:Custom Link 1 URL" content="/downloads">
-  <meta name="text:Custom Link 1 Icon" content="download">
   <meta name="text:Custom Link 2" content="resources">
   <meta name="text:Custom Link 2 URL" content="/resources">
-  <meta name="text:Custom Link 2 Icon" content="books">
   <meta name="text:Custom Link 3" content="">
   <meta name="text:Custom Link 3 URL" content="">
   <meta name="text:Custom Link 3 Icon" content="link">
@@ -49,7 +50,7 @@ __INLINE_CSS__
 </style>
 </head>
 <body>
-  <!-- Reference icons. Links are replaced with Tumblr-hosted asset URLs at build time. -->
+  <!-- UI SVG symbol definitions; image asset placeholders are resolved by build.py. -->
   <svg class="icon-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
     <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.9a5.5 5.5 0 0 0-7.8 0L12 5.96l-1.07-1.07a5.5 5.5 0 0 0-7.78 7.78L12 21l8.8-8.3a5.5 5.5 0 0 0 0-7.8z"/></symbol>
     <symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4M3 11V8a2 2 0 0 1 2-2h16M7 22l-4-4 4-4m14-1v3a2 2 0 0 1-2 2H3"/></symbol>
@@ -91,12 +92,12 @@ __INLINE_CSS__
         </section>
         {/block:IfShowNeeds}
         <nav class="side-nav" aria-label="Blog navigation">
-          <a class="nav-item {block:IndexPage}active{/block:IndexPage}" href="/"><i class="ti ti-{text:Home Icon}" aria-hidden="true"></i><span>{text:Home Label}</span></a>
-          {block:AskEnabled}{block:IfShowMessage}<a class="nav-item" href="/ask"><i class="ti ti-{text:Message Icon}" aria-hidden="true"></i><span>{text:Message Label}</span></a>{/block:IfShowMessage}{/block:AskEnabled}
-          {block:IfCustomLink1}<a class="nav-item" href="{text:Custom Link 1 URL}"><i class="ti ti-{text:Custom Link 1 Icon}" aria-hidden="true"></i><span>{text:Custom Link 1}</span></a>{/block:IfCustomLink1}
-          {block:IfCustomLink2}<a class="nav-item" href="{text:Custom Link 2 URL}"><i class="ti ti-{text:Custom Link 2 Icon}" aria-hidden="true"></i><span>{text:Custom Link 2}</span></a>{/block:IfCustomLink2}
+          <a class="nav-item {block:IndexPage}active{/block:IndexPage}" href="/"><img src="__ASSET_HOME__" alt="" aria-hidden="true"><span>{text:Home Label}</span></a>
+          {block:AskEnabled}{block:IfShowMessage}<a class="nav-item" href="/ask"><img src="__ASSET_ASK__" alt="" aria-hidden="true"><span>{text:Message Label}</span></a>{/block:IfShowMessage}{/block:AskEnabled}
+          {block:IfCustomLink1}<a class="nav-item" href="{text:Custom Link 1 URL}"><img src="__ASSET_DOWNLOADS__" alt="" aria-hidden="true"><span>{text:Custom Link 1}</span></a>{/block:IfCustomLink1}
+          {block:IfCustomLink2}<a class="nav-item" href="{text:Custom Link 2 URL}"><img src="__ASSET_RESOURCES__" alt="" aria-hidden="true"><span>{text:Custom Link 2}</span></a>{/block:IfCustomLink2}
           {block:IfCustomLink3}<a class="nav-item" href="{text:Custom Link 3 URL}"><i class="ti ti-{text:Custom Link 3 Icon}" aria-hidden="true"></i><span>{text:Custom Link 3}</span></a>{/block:IfCustomLink3}
-          {block:IfShowArchive}<a class="nav-item" href="/archive"><i class="ti ti-{text:Archive Icon}" aria-hidden="true"></i><span>{text:Archive Label}</span></a>{/block:IfShowArchive}
+          {block:IfShowArchive}<a class="nav-item" href="/archive"><img src="__ASSET_ARCHIVE__" alt="" aria-hidden="true"><span>{text:Archive Label}</span></a>{/block:IfShowArchive}
         </nav>
         <div class="sidebar-bottom">
           <div class="sidebar-bottom-row"><span>made for slow internet days</span><button aria-label="Switch color theme" class="theme-button" id="themeButton" title="Toggle dark / light" type="button"><svg class="stroke-icon" aria-hidden="true"><use href="#i-sun"/></svg></button></div>
@@ -216,10 +217,6 @@ __INLINE_CSS__
         {block:IfShowMusicWidget}
         <section class="player-panel" aria-label="Decorative music player">
           <div class="player-titlebar">
-            <div class="player-title-icons" aria-hidden="true">
-              <i class="ti ti-device-speaker"></i>
-              <i class="ti ti-wave-sine"></i>
-            </div>
             <div class="player-title-text">player</div>
             <div class="player-window-controls" aria-hidden="true">
               <span><i class="ti ti-minus"></i></span>
@@ -250,7 +247,7 @@ __INLINE_CSS__
           </div>
         </section>
         {/block:IfShowMusicWidget}
-        <div class="rail-decoration"><img src="__ASSET_PLUMBOB__" alt=""><span>see you in pleasantview</span></div>
+        <a class="rail-decoration" href="https://github.com/batsux9/blog-assets" target="_blank" rel="noopener noreferrer" aria-label="Theme source on GitHub"><img src="__ASSET_PLUMBOB__" alt=""><span>theme info</span></a>
       </aside>
     </div>
   </div>

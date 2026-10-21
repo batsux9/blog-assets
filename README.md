@@ -64,3 +64,12 @@ The theme follows the free-text icon-field pattern used by [Seyche's Lilac theme
 **Working process:** after editing source in GitHub, rerun `python build.py` and paste the newly generated `dist/theme.html` into Tumblr's HTML editor. A repository change does not automatically update the live blog. Note: `dist/local-preview.html` is a static snapshot, not a Tumblr renderer.
 
 The preview helper `make_preview.py` refreshes the **CSS and JS inside the checked-in visual snapshot**. It does not automatically re-render changing Tumblr page markup; verify layout changes in Tumblr's own preview.
+
+## UI polish (October 2026)
+
+- Flat, **decorative** music player with shared titlebar/card design; its transport and volume controls intentionally do not play audio. The plumbob is centered on the slider.
+- Sidebar navigation uses the current filled/isometric SVG art in `assets/icons/`. The optional third custom link still accepts a Tabler icon name.
+- Sticky desktop sidebars have viewport-height **footer zones**; at very short screen heights, normal browser scrolling takes over. Vertical separators are drawn by `.main-panel`, not by sticky sidebars.
+- The right-side plumbob + **theme info** is one link to this GitHub repository.
+- Tumblr Theme Options → **Main Font Size**: `13`, `13.5`, `14`, `14.5` (default), `15`. This scales primary body/post/sidebar text and related metadata while leaving decorative titlebar and control icon sizes stable.
+- The source stylesheet contains a Tumblr customizer token; run `python build.py` for Tumblr, or `python make_preview.py` to replace it with `14.5` in the static fixture.

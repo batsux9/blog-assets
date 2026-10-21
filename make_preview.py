@@ -11,6 +11,7 @@ snapshot = R / "dist/local-preview.html"
 html = snapshot.read_text(encoding="utf-8")
 css = (R / "src/theme.css").read_text(encoding="utf-8")
 css = css.replace('url("{image:Wallpaper}")', 'url("../assets/images/neighborhood-night.webp")')
+css = css.replace('{select:Main Font Size}', '14.5')
 js = (R / "src/theme.js").read_text(encoding="utf-8")
 html, css_matches = re.subn(r"<style>[\s\S]*?</style>", lambda _: "<style>\n" + css + "\n</style>", html, count=1)
 html, js_matches = re.subn(r"<script>[\s\S]*?</script>", lambda _: "<script>\n" + js + "\n</script>", html, count=1)
