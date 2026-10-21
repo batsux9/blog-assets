@@ -1579,13 +1579,17 @@ img {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  /* Height is driven by the real SVG aspect ratio (~21px), not a 14px grid. */
   transform: translate(-50%, -50%);
-  display: grid;
-  place-items: center;
+  display: block;
+  line-height: 0;
 }
-.player-slider-thumb img { display: block; width: 12px; height: auto; }
+.player-slider-thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 .profile p { white-space: pre-line; }
 
 {CustomCSS}
