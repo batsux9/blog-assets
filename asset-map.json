@@ -1,8 +1,8 @@
 {
-  "plumbob": "https://batsux9.github.io/blog-assets/assets/icons/plumbob.svg",
-  "home": "https://batsux9.github.io/blog-assets/assets/icons/home.svg",
-  "ask": "https://batsux9.github.io/blog-assets/assets/icons/ask.svg",
-  "downloads": "https://batsux9.github.io/blog-assets/assets/icons/downloads.svg",
-  "resources": "https://batsux9.github.io/blog-assets/assets/icons/resources.svg",
-  "archive": "https://batsux9.github.io/blog-assets/assets/icons/archive.svg"
+  "plumbob": "https://raw.githubusercontent.com/batsux9/blog-assets/main/assets/icons/plumbob.svg",
+  "home": "https://raw.githubusercontent.com/batsux9/blog-assets/main/assets/icons/home.svg",
+  "ask": "https://raw.githubusercontent.com/batsux9/blog-assets/main/assets/icons/ask.svg",
+  "downloads": "https://raw.githubusercontent.com/batsux9/blog-assets/main/assets/icons/downloads.svg",
+  "resources": "https://raw.githubusercontent.com/batsux9/blog-assets/main/assets/icons/resources.svg",
+  "archive": "https://raw.githubusercontent.com/batsux9/blog-assets/main/assets/icons/archive.svg"
 }

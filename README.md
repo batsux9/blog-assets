@@ -39,7 +39,7 @@ build.py            Single-file theme builder (Python 3)
 
 **Navigation icons:** The 6 present `assets/icons/*.svg` files are temporary. We may later switch to the preserved PNGs in `assets/legacy/icons/` or Tabler Icons. No new custom SVG drawing is required now. Small interface controls already use inline stroke icons.
 
-**Asset hosting:** The current `asset-map.json` contains only those six active navigation-icon URLs. If using them from GitHub Pages, enable Pages on **main / root** and verify the URLs. Older assets (21 original files) remain byte-for-byte under `assets/legacy/`.
+**Asset hosting:** The current `asset-map.json` uses direct public GitHub **raw file URLs** for the six temporary SVGs, so GitHub Pages is **not required for the first Tumblr test**. We can switch to Pages or Tabler later. Older assets (21 original files) remain byte-for-byte under `assets/legacy/`.
 
 ## Next steps
 
