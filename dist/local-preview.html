@@ -317,7 +317,7 @@ img {
 }
 .profile .profile-interests {
   margin-top: 9px;
-  margin-bottom: 5px;
+  margin-bottom: 0;
 }
 .side-nav {
   display: flex;
@@ -361,7 +361,7 @@ img {
 }
 .sidebar-bottom {
   margin-top: auto;
-  padding-top: 22px;
+  padding-top: 18px;
 }
 .sidebar-note {
   padding: 12px;
@@ -386,18 +386,23 @@ img {
 }
 .sidebar-bottom-row {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
+  gap: 10px;
   padding: 14px 5px 0;
   font-size: 10px;
   color: var(--faint);
 }
+.sidebar-bottom-row > span { line-height: 1.2; }
 .theme-button {
   background: transparent;
   border: 0;
   padding: 3px;
   color: var(--muted);
   border-radius: 5px;
+  margin-left: auto;
+  align-self: flex-end;
+  transform: translateY(4px);
 }
 .theme-button:hover {
   color: var(--green);
@@ -1227,26 +1232,6 @@ img {
   .sidebar-bottom { padding-top: 10px; }
 }
 
-/* Decorative sidebar track display, intentionally not an audio player. */
-.music-widget { display: block; }
-.music-label { color: var(--green); font-size: 11px; font-weight: 600; }
-.music-track { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
-.music-art {
-  display: grid;
-  place-items: center;
-  flex: 0 0 38px;
-  width: 38px;
-  height: 38px;
-  background: var(--blue-soft);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  color: var(--lavender);
-  font-size: 20px;
-}
-.music-info { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
-.music-info strong { color: var(--text); font-size: 12px; font-weight: 600; line-height: 1.3; }
-.music-info span { color: var(--muted); font-size: 11px; line-height: 1.3; }
-
 /* Actual Tumblr post content, including content created in the NPF editor. */
 .post-card { overflow-wrap: anywhere; }
 .post-content img, .post-content video, .post-content iframe, .post-content embed {
@@ -1361,6 +1346,7 @@ img {
 
 /* Sims-like status readout: compact enough for short browser windows. */
 .needs-panel {
+  margin-top: -4px;
   padding: 10px 11px 11px;
   background: var(--card);
   border: 1px solid var(--line);
@@ -1369,14 +1355,13 @@ img {
 .needs-heading {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-bottom: 8px;
+  justify-content: center;
+  margin-bottom: 9px;
   color: var(--green);
   font-size: 10.5px;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
 }
-.needs-heading .ti { font-size: 13px; }
 .need-row {
   display: grid;
   grid-template-columns: 48px minmax(0,1fr);
@@ -1399,11 +1384,122 @@ img {
 .need-fill { display: block; height: 100%; max-width: 100%; border-radius: 1px; background: var(--green); }
 .need-energy { background: #b5bb94; }
 .need-nicotine { background: var(--lavender); }
-.music-widget-rail { padding: 15px 14px; }
-.music-widget-rail .music-label { display: flex; align-items: center; gap: 5px; }
-.music-widget-rail .music-label .ti { font-size: 13px; }
-.music-widget-rail .music-art .ti { font-size: 20px; }
-.music-widget-rail .music-track { margin-top: 12px; }
+/* Retro music player: display-only, no audio or interactive playback controls. */
+.player-panel {
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--card-soft), var(--card));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: inset 0 1px 0 rgba(210, 225, 255, 0.07);
+}
+.player-titlebar {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  min-height: 34px;
+  background: linear-gradient(180deg, var(--blue-soft), var(--card-soft));
+  border-bottom: 1px solid var(--border);
+}
+.player-title-icons {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 10px;
+  color: var(--muted);
+  border-right: 1px solid var(--border);
+}
+.player-title-icons .ti { font-size: 13px; }
+.player-title-text {
+  min-width: 0;
+  padding: 0 10px;
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: lowercase;
+}
+.player-window-controls { display: flex; align-items: center; }
+.player-window-controls span {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 34px;
+  color: var(--muted);
+  border-left: 1px solid var(--border);
+}
+.player-window-controls .ti { font-size: 14px; line-height: 1; }
+.player-body { padding: 14px 14px 16px; }
+.player-track-row { display: flex; align-items: center; gap: 12px; }
+.player-art {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--blue-soft);
+  color: var(--text);
+}
+.player-art .ti { font-size: 28px; line-height: 1; }
+.player-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.player-meta strong,
+.player-meta span {
+  display: block;
+  color: var(--text);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.player-meta strong { font-size: 11px; font-weight: 500; }
+.player-meta span { font-size: 11px; font-weight: 600; }
+.player-divider { height: 1px; margin: 14px 0 12px; background: var(--line); }
+.player-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+  color: var(--green);
+}
+.player-controls .ti { font-size: 18px; line-height: 1; }
+.player-controls .is-active .ti { font-size: 20px; }
+.player-slider-row {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+}
+.player-slider-row > .ti { font-size: 15px; opacity: 0.9; }
+.player-slider {
+  position: relative;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--border);
+}
+.player-slider-fill {
+  position: absolute;
+  inset: 1px auto 1px 1px;
+  width: 56%;
+  border-radius: inherit;
+  background: var(--green);
+}
+.player-slider-thumb {
+  position: absolute;
+  left: 56%;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+}
+.player-slider-thumb img { display: block; width: 12px; height: auto; }
 .profile p { white-space: pre-line; }
 
 </style>
@@ -1444,7 +1540,7 @@ img {
         </section>
                 
         <section class="needs-panel" aria-label="Personal needs">
-          <div class="needs-heading"><i class="ti ti-heartbeat" aria-hidden="true"></i> needs</div>
+          <div class="needs-heading">needs</div>
           <div class="need-row"><span>hunger</span><div class="need-meter" role="meter" aria-label="Hunger" aria-valuemin="0" aria-valuemax="100" aria-valuenow="78"><span class="need-fill need-hunger" style="width:clamp(0%, 78%, 100%)"></span></div></div>
           <div class="need-row"><span>energy</span><div class="need-meter" role="meter" aria-label="Energy" aria-valuemin="0" aria-valuemax="100" aria-valuenow="52"><span class="need-fill need-energy" style="width:clamp(0%, 52%, 100%)"></span></div></div>
           <div class="need-row"><span>nicotine</span><div class="need-meter" role="meter" aria-label="Nicotine" aria-valuemin="0" aria-valuemax="100" aria-valuenow="24"><span class="need-fill need-nicotine" style="width:clamp(0%, 24%, 100%)"></span></div></div>
@@ -1502,11 +1598,39 @@ img {
           </figure>
         </section>
         
-        <section class="rail-panel music-widget music-widget-rail" aria-label="Music currently on rotation">
-          <div class="music-label"><i class="ti ti-music" aria-hidden="true"></i> on rotation</div>
-          <div class="music-track">
-            <div class="music-art" aria-hidden="true"><i class="ti ti-music"></i></div>
-            <div class="music-info"><strong>Teardrop</strong><span>Massive Attack</span></div>
+        <section class="player-panel" aria-label="Decorative music player">
+          <div class="player-titlebar">
+            <div class="player-title-icons" aria-hidden="true">
+              <i class="ti ti-device-speaker"></i>
+              <i class="ti ti-wave-sine"></i>
+            </div>
+            <div class="player-title-text">player</div>
+            <div class="player-window-controls" aria-hidden="true">
+              <span><i class="ti ti-minus"></i></span>
+              <span><i class="ti ti-x"></i></span>
+            </div>
+          </div>
+          <div class="player-body">
+            <div class="player-track-row">
+              <div class="player-art" aria-hidden="true"><i class="ti ti-music"></i></div>
+              <div class="player-meta">
+                <strong>Massive Attack</strong>
+                <span>Teardrop</span>
+              </div>
+            </div>
+            <div class="player-divider"></div>
+            <div class="player-controls" aria-hidden="true">
+              <span><i class="ti ti-player-track-prev-filled"></i></span>
+              <span class="is-active"><i class="ti ti-player-pause-filled"></i></span>
+              <span><i class="ti ti-player-track-next-filled"></i></span>
+            </div>
+            <div class="player-slider-row" aria-hidden="true">
+              <i class="ti ti-volume"></i>
+              <div class="player-slider">
+                <span class="player-slider-fill"></span>
+                <span class="player-slider-thumb"><img src="../assets/icons/plumbob.svg" alt=""></span>
+              </div>
+            </div>
           </div>
         </section>
         

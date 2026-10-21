@@ -84,7 +84,7 @@ __INLINE_CSS__
         </section>
         {block:IfShowNeeds}
         <section class="needs-panel" aria-label="Personal needs">
-          <div class="needs-heading"><i class="ti ti-heartbeat" aria-hidden="true"></i> needs</div>
+          <div class="needs-heading">needs</div>
           <div class="need-row"><span>hunger</span><div class="need-meter" role="meter" aria-label="Hunger" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{text:Need Hunger}"><span class="need-fill need-hunger" style="width:clamp(0%, {text:Need Hunger}%, 100%)"></span></div></div>
           <div class="need-row"><span>energy</span><div class="need-meter" role="meter" aria-label="Energy" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{text:Need Energy}"><span class="need-fill need-energy" style="width:clamp(0%, {text:Need Energy}%, 100%)"></span></div></div>
           <div class="need-row"><span>nicotine</span><div class="need-meter" role="meter" aria-label="Nicotine" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{text:Need Nicotine}"><span class="need-fill need-nicotine" style="width:clamp(0%, {text:Need Nicotine}%, 100%)"></span></div></div>
@@ -214,11 +214,39 @@ __INLINE_CSS__
         </section>
         {/block:IfFeaturedScreenshot}
         {block:IfShowMusicWidget}
-        <section class="rail-panel music-widget music-widget-rail" aria-label="Music currently on rotation">
-          <div class="music-label"><i class="ti ti-music" aria-hidden="true"></i> on rotation</div>
-          <div class="music-track">
-            <div class="music-art" aria-hidden="true"><i class="ti ti-music"></i></div>
-            <div class="music-info"><strong>{text:Music Track}</strong><span>{text:Music Artist}</span></div>
+        <section class="player-panel" aria-label="Decorative music player">
+          <div class="player-titlebar">
+            <div class="player-title-icons" aria-hidden="true">
+              <i class="ti ti-device-speaker"></i>
+              <i class="ti ti-wave-sine"></i>
+            </div>
+            <div class="player-title-text">player</div>
+            <div class="player-window-controls" aria-hidden="true">
+              <span><i class="ti ti-minus"></i></span>
+              <span><i class="ti ti-x"></i></span>
+            </div>
+          </div>
+          <div class="player-body">
+            <div class="player-track-row">
+              <div class="player-art" aria-hidden="true"><i class="ti ti-music"></i></div>
+              <div class="player-meta">
+                <strong>{text:Music Artist}</strong>
+                <span>{text:Music Track}</span>
+              </div>
+            </div>
+            <div class="player-divider"></div>
+            <div class="player-controls" aria-hidden="true">
+              <span><i class="ti ti-player-track-prev-filled"></i></span>
+              <span class="is-active"><i class="ti ti-player-pause-filled"></i></span>
+              <span><i class="ti ti-player-track-next-filled"></i></span>
+            </div>
+            <div class="player-slider-row" aria-hidden="true">
+              <i class="ti ti-volume"></i>
+              <div class="player-slider">
+                <span class="player-slider-fill"></span>
+                <span class="player-slider-thumb"><img src="__ASSET_PLUMBOB__" alt=""></span>
+              </div>
+            </div>
           </div>
         </section>
         {/block:IfShowMusicWidget}
