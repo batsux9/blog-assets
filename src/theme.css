@@ -1400,8 +1400,8 @@ iframe.tmblr-iframe--unified-controls {
   .pagination { flex-wrap: wrap; }
 }
 
-/* Tumblr builds /ask as a synthetic Text post inside {block:Posts}.
-   Let it supply the working form; do not render a second iframe in the template. */
+/* Tumblr supplies the Ask page as a synthetic text post.
+   Use its native form; do not render a second iframe in the template. */
 .ask-page-post > .post-top,
 .ask-page-post > .post-footer,
 .ask-page-post > .post-tags,
