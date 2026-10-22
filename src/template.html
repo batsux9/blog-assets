@@ -1,6 +1,6 @@
 <!doctype html>
 <!-- little world of batsu — Tumblr template v0.1 (2026) -->
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" class="{block:IfRoundedPhotoCorners}rounded-photos{/block:IfRoundedPhotoCorners}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,6 +16,7 @@
   <meta name="if:Show Archive" content="1">
   <meta name="if:Show Needs" content="1">
   <meta name="if:Show Music Widget" content="1">
+  <meta name="if:Rounded Photo Corners" content="1">
   <meta name="text:Profile Heading" content="hi, it's batsu">
   <meta name="text:Profile Bio" content="a little corner of the internet for thoughts, screenshots and things i like.">
   <meta name="text:Profile Interests" content="sims, pixels, design, and everyday life.">
@@ -41,6 +42,7 @@
   <meta name="text:Custom Link 3 URL" content="">
   <meta name="text:Custom Link 3 Icon" content="link">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.49.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="https://static.tumblr.com/qudkd6d/OcDnl99gb/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400..700&family=Inter:wght@400..700&family=Sora:wght@400..700&display=swap" rel="stylesheet">
@@ -143,7 +145,18 @@ __INLINE_CSS__
               {/block:Photo}
 
               {block:Photoset}
-                <div class="post-media">{Photoset-700}</div>
+                <div class="post-media">
+                  <div class="photo-slideshow" id="photoset_{PostID}" data-layout="{PhotosetLayout}">
+                    {block:Photos}
+                    <div class="photo-data">
+                      <div class="pxu-photo">
+                        <img src="{PhotoURL-500}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" data-highres="{PhotoURL-HighRes}" data-width="{PhotoWidth-HighRes}" data-height="{PhotoHeight-HighRes}" alt="{PhotoAlt}" loading="lazy">
+                      </div>
+                      <a class="tumblr-box" rel="post-{PostID}" href="{PhotoURL-HighRes}" aria-label="View full-size photo"></a>
+                    </div>
+                    {/block:Photos}
+                  </div>
+                </div>
                 {block:Caption}<div class="post-caption">{block:NotReblog}{Caption}{/block:NotReblog}{block:RebloggedFrom}<div class="reblog-trail">{block:Reblogs}<section class="trail-entry"><div class="trail-author"><img src="{PortraitURL-64}" alt=""><strong><a href="{Permalink}">{Username}</a></strong></div><div class="trail-body">{Body}</div></section>{/block:Reblogs}</div>{/block:RebloggedFrom}</div>{/block:Caption}
               {/block:Photoset}
 
@@ -253,6 +266,8 @@ __INLINE_CSS__
       </aside>
     </div>
   </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://static.tumblr.com/yxfeliq/hHwojmt8m/bctphotoset.min.js"></script>
   <script>
 __INLINE_JS__
 </script>

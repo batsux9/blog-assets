@@ -53,3 +53,19 @@ section/card markup. Add only verified, useful links when ready.
 To publish changes to the theme stylesheet, run `python build.py` and copy
 `dist/theme.html` into Tumblr's **Edit HTML** editor. Changes to page content
 must be pasted separately into that page's editor.
+
+## Legacy Tumblr photosets
+
+Legacy photoset posts are rendered directly from the Tumblr photo blocks and
+layout token rather than the old `Photoset-700` iframe. The page loads
+PixelUnion's photoset script and stylesheet (the same approach used in Seyche's
+Lilac theme) and a scoped CSS radius on the individual photos.
+
+The theme customizer includes **Rounded Photo Corners** (on by default).
+The setting applies to legacy photosets, ordinary photos, and NPF images.
+If the external plugin is unavailable, photos remain visible in a vertical
+stack rather than disappearing. Check the layout and lightbox on the live blog
+after updating the theme; the local fixture does not simulate Tumblr's rendering.
+
+Credits: PixelUnion photoset plugin, via the Lilac theme by Seyche
+(https://github.com/seyche/tumblr-themes).

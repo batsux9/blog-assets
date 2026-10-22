@@ -1,6 +1,6 @@
 <!doctype html>
 <!-- little world of batsu — Tumblr template v0.1 (2026) -->
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" class="{block:IfRoundedPhotoCorners}rounded-photos{/block:IfRoundedPhotoCorners}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,6 +16,7 @@
   <meta name="if:Show Archive" content="1">
   <meta name="if:Show Needs" content="1">
   <meta name="if:Show Music Widget" content="1">
+  <meta name="if:Rounded Photo Corners" content="1">
   <meta name="text:Profile Heading" content="hi, it's batsu">
   <meta name="text:Profile Bio" content="a little corner of the internet for thoughts, screenshots and things i like.">
   <meta name="text:Profile Interests" content="sims, pixels, design, and everyday life.">
@@ -41,6 +42,7 @@
   <meta name="text:Custom Link 3 URL" content="">
   <meta name="text:Custom Link 3 Icon" content="link">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.49.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="https://static.tumblr.com/qudkd6d/OcDnl99gb/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400..700&family=Inter:wght@400..700&family=Sora:wght@400..700&display=swap" rel="stylesheet">
@@ -54,6 +56,7 @@
   --font-mono: "Geist Mono", monospace;
   --font-reading: var(--font);
   --font-display: "Sora", sans-serif;
+  --photo-corner-radius: 0px;
 
   /* Post typography */
   --main-font-size: {select:Main Font Size}px;
@@ -89,6 +92,7 @@
   --radius: 10px;
   --wallpaper-overlay: rgba(10, 18, 32, 0.38);
 }
+:root.rounded-photos { --photo-corner-radius: 6px; }
 :root[data-theme="light"] {
   color-scheme: light;
   --canvas: #dce2ea;
@@ -1407,7 +1411,7 @@ iframe.tmblr-iframe--unified-controls {
   align-items: stretch;
 }
 .post-content .npf_row > figure { min-width: 0; }
-.post-content .npf_row img { display: block; width: 100%; height: auto; border-radius: 4px; }
+.post-content .npf_row img { display: block; width: 100%; height: auto; border-radius: var(--photo-corner-radius); }
 .post-content .tmblr-full > img { display: block; width: 100%; height: auto; }
 .post-content .npf_quote { font-size: 1.15em; line-height: 1.5; }
 .post-content .npf_link, .post-content .link-card {
@@ -1460,13 +1464,30 @@ iframe.tmblr-iframe--unified-controls {
 .native-like:hover { color: var(--green); }
 .post-actions .stroke-icon { width: 19px; height: 19px; }
 .post-caption { margin-top: 10px; }
-/* Clip both linked photos and Tumblr's legacy embedded photosets at the
-   media container boundary, regardless of their internal HTML structure. */
-.post-media {
-  border-radius: 6px;
-  overflow: hidden;
+/* The legacy photoset renders as real HTML, rather than an inaccessible iframe.
+   PixelUnion preserves the row layout. Each photo can be rounded separately. */
+.post-media { min-width: 0; }
+.post-media > img,
+.post-media > a img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--photo-corner-radius);
 }
-.post-media > img { display: block; width: 100%; height: auto; border-radius: 6px; }
+.photo-slideshow { max-width: 100%; }
+.photo-slideshow:not(.processed) .photo-data + .photo-data { margin-top: 5px; }
+.photo-slideshow:not(.processed) .photo-data img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.photo-slideshow .pxu-photo,
+.photo-slideshow .pxu-photo img {
+  border-radius: var(--photo-corner-radius);
+}
+.photo-slideshow .pxu-photo { overflow: hidden; }
+.photo-slideshow .pxu-photo img { display: block; max-width: 100%; }
+.photo-slideshow .tumblr-box { border-radius: var(--photo-corner-radius); }
 .post-media > iframe { max-width: 100%; }
 .post-media:empty { display: none; }
 .post-content .post-quote { background: var(--green-soft); border: 1px solid var(--green-border); border-radius: 6px; padding: 18px; }
@@ -2013,7 +2034,18 @@ iframe.tmblr-iframe--unified-controls {
               {/block:Photo}
 
               {block:Photoset}
-                <div class="post-media">{Photoset-700}</div>
+                <div class="post-media">
+                  <div class="photo-slideshow" id="photoset_{PostID}" data-layout="{PhotosetLayout}">
+                    {block:Photos}
+                    <div class="photo-data">
+                      <div class="pxu-photo">
+                        <img src="{PhotoURL-500}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" data-highres="{PhotoURL-HighRes}" data-width="{PhotoWidth-HighRes}" data-height="{PhotoHeight-HighRes}" alt="{PhotoAlt}" loading="lazy">
+                      </div>
+                      <a class="tumblr-box" rel="post-{PostID}" href="{PhotoURL-HighRes}" aria-label="View full-size photo"></a>
+                    </div>
+                    {/block:Photos}
+                  </div>
+                </div>
                 {block:Caption}<div class="post-caption">{block:NotReblog}{Caption}{/block:NotReblog}{block:RebloggedFrom}<div class="reblog-trail">{block:Reblogs}<section class="trail-entry"><div class="trail-author"><img src="{PortraitURL-64}" alt=""><strong><a href="{Permalink}">{Username}</a></strong></div><div class="trail-body">{Body}</div></section>{/block:Reblogs}</div>{/block:RebloggedFrom}</div>{/block:Caption}
               {/block:Photoset}
 
@@ -2123,6 +2155,8 @@ iframe.tmblr-iframe--unified-controls {
       </aside>
     </div>
   </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://static.tumblr.com/yxfeliq/hHwojmt8m/bctphotoset.min.js"></script>
   <script>
 /* Theme-only interactions. Tumblr owns search, posts, likes, reblogs and pages. */
 (() => {
@@ -2147,38 +2181,19 @@ iframe.tmblr-iframe--unified-controls {
     else link.removeAttribute('aria-current');
   });
 
-  // Tumblr's legacy photosets render inside same-site iframes. Style each
-  // image inside the frame rather than clipping only the outer photoset.
-  // If a frame is cross-origin, skip it without changing Tumblr's layout.
-  const styleLegacyPhotoset = (frame) => {
-    try {
-      const doc = frame.contentDocument;
-      if (!doc?.head) return;
-      if (doc.getElementById('batsu-photoset-corners')) return;
-      const style = doc.createElement('style');
-      style.id = 'batsu-photoset-corners';
-      style.textContent = [
-        '.photoset_photo, .photoset_photo img { border-radius: 6px !important; }',
-        '.photoset_photo { overflow: hidden; }'
-      ].join('\n');
-      doc.head.appendChild(style);
-      frame.dataset.photosetCorners = 'applied';
-    } catch {
-      // Same-origin policy prevents access if Tumblr redirects the frame.
-      frame.dataset.photosetCorners = 'blocked';
-    }
-  };
-  document.querySelectorAll('.post-media iframe.photoset').forEach((frame) => {
-    frame.addEventListener('load', () => styleLegacyPhotoset(frame));
-    // Covers frames that finished loading before the theme script ran.
-    try {
-      if (frame.contentDocument?.readyState === 'complete') {
-        styleLegacyPhotoset(frame);
-      }
-    } catch {
-      frame.dataset.photosetCorners = 'blocked';
-    }
-  });
+  // Render legacy photosets in the page, using Tumblr's original layout
+  // string and PixelUnion's photoset plugin (as in Seyche's Lilac theme).
+  // Plain stacked images remain visible if the plugin fails to load.
+  if (window.jQuery?.fn?.pxuPhotoset) {
+    window.jQuery('.photo-slideshow').pxuPhotoset({
+      lightbox: true,
+      rounded: false,
+      gutter: '5px',
+      photoset: '.photo-slideshow',
+      photoWrap: '.photo-data',
+      photo: '.pxu-photo'
+    });
+  }
 
   const chosen = window.localStorage.getItem('batsu-theme');
   if (chosen === 'light' || chosen === 'dark') root.dataset.theme = chosen;

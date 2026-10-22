@@ -7,6 +7,7 @@
   --font-mono: "Geist Mono", monospace;
   --font-reading: var(--font);
   --font-display: "Sora", sans-serif;
+  --photo-corner-radius: 0px;
 
   /* Post typography */
   --main-font-size: {select:Main Font Size}px;
@@ -42,6 +43,7 @@
   --radius: 10px;
   --wallpaper-overlay: rgba(10, 18, 32, 0.38);
 }
+:root.rounded-photos { --photo-corner-radius: 6px; }
 :root[data-theme="light"] {
   color-scheme: light;
   --canvas: #dce2ea;
@@ -1360,7 +1362,7 @@ iframe.tmblr-iframe--unified-controls {
   align-items: stretch;
 }
 .post-content .npf_row > figure { min-width: 0; }
-.post-content .npf_row img { display: block; width: 100%; height: auto; border-radius: 4px; }
+.post-content .npf_row img { display: block; width: 100%; height: auto; border-radius: var(--photo-corner-radius); }
 .post-content .tmblr-full > img { display: block; width: 100%; height: auto; }
 .post-content .npf_quote { font-size: 1.15em; line-height: 1.5; }
 .post-content .npf_link, .post-content .link-card {
@@ -1413,13 +1415,30 @@ iframe.tmblr-iframe--unified-controls {
 .native-like:hover { color: var(--green); }
 .post-actions .stroke-icon { width: 19px; height: 19px; }
 .post-caption { margin-top: 10px; }
-/* Clip both linked photos and Tumblr's legacy embedded photosets at the
-   media container boundary, regardless of their internal HTML structure. */
-.post-media {
-  border-radius: 6px;
-  overflow: hidden;
+/* The legacy photoset renders as real HTML, rather than an inaccessible iframe.
+   PixelUnion preserves the row layout. Each photo can be rounded separately. */
+.post-media { min-width: 0; }
+.post-media > img,
+.post-media > a img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--photo-corner-radius);
 }
-.post-media > img { display: block; width: 100%; height: auto; border-radius: 6px; }
+.photo-slideshow { max-width: 100%; }
+.photo-slideshow:not(.processed) .photo-data + .photo-data { margin-top: 5px; }
+.photo-slideshow:not(.processed) .photo-data img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.photo-slideshow .pxu-photo,
+.photo-slideshow .pxu-photo img {
+  border-radius: var(--photo-corner-radius);
+}
+.photo-slideshow .pxu-photo { overflow: hidden; }
+.photo-slideshow .pxu-photo img { display: block; max-width: 100%; }
+.photo-slideshow .tumblr-box { border-radius: var(--photo-corner-radius); }
 .post-media > iframe { max-width: 100%; }
 .post-media:empty { display: none; }
 .post-content .post-quote { background: var(--green-soft); border: 1px solid var(--green-border); border-radius: 6px; padding: 18px; }

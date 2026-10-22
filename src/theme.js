@@ -21,38 +21,19 @@
     else link.removeAttribute('aria-current');
   });
 
-  // Tumblr's legacy photosets render inside same-site iframes. Style each
-  // image inside the frame rather than clipping only the outer photoset.
-  // If a frame is cross-origin, skip it without changing Tumblr's layout.
-  const styleLegacyPhotoset = (frame) => {
-    try {
-      const doc = frame.contentDocument;
-      if (!doc?.head) return;
-      if (doc.getElementById('batsu-photoset-corners')) return;
-      const style = doc.createElement('style');
-      style.id = 'batsu-photoset-corners';
-      style.textContent = [
-        '.photoset_photo, .photoset_photo img { border-radius: 6px !important; }',
-        '.photoset_photo { overflow: hidden; }'
-      ].join('\n');
-      doc.head.appendChild(style);
-      frame.dataset.photosetCorners = 'applied';
-    } catch {
-      // Same-origin policy prevents access if Tumblr redirects the frame.
-      frame.dataset.photosetCorners = 'blocked';
-    }
-  };
-  document.querySelectorAll('.post-media iframe.photoset').forEach((frame) => {
-    frame.addEventListener('load', () => styleLegacyPhotoset(frame));
-    // Covers frames that finished loading before the theme script ran.
-    try {
-      if (frame.contentDocument?.readyState === 'complete') {
-        styleLegacyPhotoset(frame);
-      }
-    } catch {
-      frame.dataset.photosetCorners = 'blocked';
-    }
-  });
+  // Render legacy photosets in the page, using Tumblr's original layout
+  // string and PixelUnion's photoset plugin (as in Seyche's Lilac theme).
+  // Plain stacked images remain visible if the plugin fails to load.
+  if (window.jQuery?.fn?.pxuPhotoset) {
+    window.jQuery('.photo-slideshow').pxuPhotoset({
+      lightbox: true,
+      rounded: false,
+      gutter: '5px',
+      photoset: '.photo-slideshow',
+      photoWrap: '.photo-data',
+      photo: '.pxu-photo'
+    });
+  }
 
   const chosen = window.localStorage.getItem('batsu-theme');
   if (chosen === 'light' || chosen === 'dark') root.dataset.theme = chosen;
