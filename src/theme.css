@@ -1400,8 +1400,37 @@ iframe.tmblr-iframe--unified-controls {
   .pagination { flex-wrap: wrap; }
 }
 
-/* Tumblr-native ask iframe (verify size on the live /ask route). */
-.tumblr-ask-iframe { display: block; width: 100%; min-height: 260px; border: 0; }
+/* Tumblr builds /ask as a synthetic Text post inside {block:Posts}.
+   Let it supply the working form; do not render a second iframe in the template. */
+.ask-page-post > .post-top,
+.ask-page-post > .post-footer,
+.ask-page-post > .post-tags,
+.ask-page-post .post-text-title:not(.ask-page-title) {
+  display: none;
+}
+.ask-page-post > .post-body {
+  margin: 0;
+}
+.ask-page-post .ask-page-title {
+  margin: 0 0 12px;
+}
+.ask-page-post iframe#ask_form,
+.ask-page-post iframe[src*="/ask_form/"] {
+  display: block;
+  width: 100% !important;
+  max-width: 100%;
+  min-height: 205px;
+  border: 0;
+  background: transparent;
+  color-scheme: inherit;
+}
+/* Cross-origin Tumblr iframe internals cannot be styled from the blog CSS.
+   Approximate a dark appearance by filtering the complete iframe.
+   This also alters the colors of images inside the form (e.g. user avatars). */
+:root[data-theme="dark"] .ask-page-post iframe#ask_form,
+:root[data-theme="dark"] .ask-page-post iframe[src*="/ask_form/"] {
+  filter: invert(1) hue-rotate(180deg);
+}
 
 /* Sims-like status readout: compact enough for short browser windows. */
 .needs-panel {
