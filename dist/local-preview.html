@@ -1429,6 +1429,12 @@ iframe.tmblr-iframe--unified-controls {
 .native-like:hover { color: var(--green); }
 .post-actions .stroke-icon { width: 19px; height: 19px; }
 .post-caption { margin-top: 10px; }
+/* Clip both linked photos and Tumblr's legacy embedded photosets at the
+   media container boundary, regardless of their internal HTML structure. */
+.post-media {
+  border-radius: 6px;
+  overflow: hidden;
+}
 .post-media > img { display: block; width: 100%; height: auto; border-radius: 6px; }
 .post-media > iframe { max-width: 100%; }
 .post-media:empty { display: none; }
