@@ -6,13 +6,13 @@
   const sidebar = document.getElementById('sidebar');
   // Keep the active sidebar item in sync with the actual route, including
   // Tumblr Custom Pages and links configured through the theme options.
-  const cleanPath = (path) => path.replace(/\\/+$/, '') || '/';
+  const cleanPath = (path) => path.replace(/\/+$/, '') || '/';
   const currentPath = cleanPath(window.location.pathname);
   document.querySelectorAll('.side-nav .nav-item').forEach((link) => {
     const destination = new URL(link.href, window.location.href);
     const targetPath = cleanPath(destination.pathname);
     const isHome = targetPath === '/' &&
-      (currentPath === '/' || /^\\/page\\/\\d+$/.test(currentPath));
+      (currentPath === '/' || /^\/page\/\d+$/.test(currentPath));
     const isCurrent = destination.origin === window.location.origin &&
       (isHome || (targetPath !== '/' && targetPath === currentPath));
 
