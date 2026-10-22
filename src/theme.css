@@ -1582,7 +1582,6 @@ iframe.tmblr-iframe--unified-controls {
   font-size: var(--main-font-size);
 }
 /* Tabler outline webfont glyphs (v3.49.0), supplied through CSS pseudo-elements. */
-.downloads-header::after,
 .downloads-category-title::before,
 .downloads-item::after {
   font-family: "tabler-icons" !important;
@@ -1596,30 +1595,33 @@ iframe.tmblr-iframe--unified-controls {
 .downloads-header {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 16px;
   padding-bottom: 16px;
   margin-bottom: 19px;
   border-bottom: 1px solid var(--line);
 }
 .downloads-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin: 0 0 5px;
   font-size: 21px;
   font-weight: 650;
   line-height: 1.3;
   letter-spacing: -0.45px;
 }
+.downloads-title img {
+  display: block;
+  width: 14px;
+  height: auto;
+  flex: 0 0 14px;
+}
 .downloads-header p {
   margin: 0;
   color: var(--faint);
   font-size: 11.5px;
   line-height: 1.4;
-}
-.downloads-header::after {
-  content: "\ea96";
-  margin-top: 3px;
-  color: var(--green);
-  font-size: 23px;
 }
 .downloads-category + .downloads-category {
   margin-top: 21px;
