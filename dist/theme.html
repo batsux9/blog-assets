@@ -1471,13 +1471,6 @@ iframe.tmblr-iframe--unified-controls {
   background: transparent;
   color-scheme: inherit;
 }
-/* Cross-origin Tumblr iframe internals cannot be styled from the blog CSS.
-   Approximate a dark appearance by filtering the complete iframe.
-   This also alters the colors of images inside the form (e.g. user avatars). */
-:root[data-theme="dark"] .ask-page-post iframe#ask_form,
-:root[data-theme="dark"] .ask-page-post iframe[src*="/ask_form/"] {
-  filter: invert(1) hue-rotate(180deg);
-}
 
 /* Sims-like status readout: compact enough for short browser windows. */
 .needs-panel {
