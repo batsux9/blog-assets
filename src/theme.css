@@ -1363,7 +1363,15 @@ iframe.tmblr-iframe--unified-controls {
 }
 .post-content .npf_row > figure { min-width: 0; }
 .post-content .npf_row img { display: block; width: 100%; height: auto; border-radius: var(--photo-corner-radius); }
-.post-content .tmblr-full > img { display: block; width: 100%; height: auto; }
+/* Individual NPF figures can appear without an npf_row wrapper.
+   Match their images directly as well, including images wrapped in links. */
+.post-content figure.tmblr-full img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--photo-corner-radius);
+}
+.post-content figure.tmblr-full > img { width: 100%; }
 .post-content .npf_quote { font-size: 1.15em; line-height: 1.5; }
 .post-content .npf_link, .post-content .link-card {
   display: block; border: 1px solid var(--border); border-radius: 7px;
