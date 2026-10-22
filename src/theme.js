@@ -17,10 +17,49 @@
     menuButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   });
   document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      const openMenu = document.querySelector('.post-options[open]');
+      if (openMenu) {
+        openMenu.open = false;
+        openMenu.querySelector('summary')?.focus();
+      }
+    }
     if (event.key === 'Escape' && sidebar?.classList.contains('open')) {
       sidebar.classList.remove('open');
       menuButton?.setAttribute('aria-expanded', 'false');
     }
+  });
+
+  const closeOtherPostMenus = (except) => {
+    document.querySelectorAll('.post-options[open]').forEach((menu) => {
+      if (menu !== except) menu.open = false;
+    });
+  };
+
+  document.addEventListener('toggle', (event) => {
+    const menu = event.target;
+    if (!menu.matches?.('.post-options') || !menu.open) return;
+    closeOtherPostMenus(menu);
+    const copy = menu.querySelector('.post-options-copy');
+    if (copy) copy.textContent = 'Copy link';
+  }, true);
+
+  document.addEventListener('click', async (event) => {
+    const copy = event.target.closest('.post-options-copy');
+    if (copy) {
+      event.preventDefault();
+      const url = copy.dataset.permalink;
+      if (!url) return;
+      try {
+        if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+        await navigator.clipboard.writeText(url);
+        copy.textContent = 'Copied!';
+      } catch {
+        window.prompt('Copy post link:', url);
+      }
+      return;
+    }
+    closeOtherPostMenus(event.target.closest('.post-options'));
   });
   document.addEventListener('click', (event) => {
     if (!sidebar || !menuButton || !sidebar.classList.contains('open')) return;

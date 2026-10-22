@@ -657,6 +657,60 @@ iframe.tmblr-iframe--unified-controls {
   width: 20px;
   height: 20px;
 }
+
+/* Compact post options; the native details element handles open/close. */
+.post-options { position: relative; flex: 0 0 auto; }
+.post-options > summary {
+  list-style: none;
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 24px;
+  padding: 2px;
+}
+.post-options > summary::-webkit-details-marker { display: none; }
+.post-options > summary .stroke-icon { width: 19px; height: 19px; }
+.post-options[open] > summary { color: var(--green); background: var(--card-soft); }
+.post-options-list {
+  position: absolute;
+  top: calc(100% + 5px);
+  right: 0;
+  z-index: 10;
+  width: max-content;
+  min-width: 170px;
+  max-width: min(260px, 80vw);
+  overflow: hidden;
+  padding: 4px;
+  color: var(--text);
+  background: var(--window);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  box-shadow: 0 10px 24px rgba(4, 10, 20, 0.25);
+}
+.post-options-list > a,
+.post-options-list > button {
+  display: block;
+  width: 100%;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 11.5px;
+  line-height: 1.4;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+.post-options-list > a:hover,
+.post-options-list > button:hover,
+.post-options-list > a:focus-visible,
+.post-options-list > button:focus-visible {
+  background: var(--green-soft);
+  color: var(--text);
+}
+.post-card:has(.post-options[open]) { position: relative; z-index: 5; }
 .post-cover {
   display: block;
   width: 100%;

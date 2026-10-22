@@ -704,6 +704,60 @@ iframe.tmblr-iframe--unified-controls {
   width: 20px;
   height: 20px;
 }
+
+/* Compact post options; the native details element handles open/close. */
+.post-options { position: relative; flex: 0 0 auto; }
+.post-options > summary {
+  list-style: none;
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 24px;
+  padding: 2px;
+}
+.post-options > summary::-webkit-details-marker { display: none; }
+.post-options > summary .stroke-icon { width: 19px; height: 19px; }
+.post-options[open] > summary { color: var(--green); background: var(--card-soft); }
+.post-options-list {
+  position: absolute;
+  top: calc(100% + 5px);
+  right: 0;
+  z-index: 10;
+  width: max-content;
+  min-width: 170px;
+  max-width: min(260px, 80vw);
+  overflow: hidden;
+  padding: 4px;
+  color: var(--text);
+  background: var(--window);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  box-shadow: 0 10px 24px rgba(4, 10, 20, 0.25);
+}
+.post-options-list > a,
+.post-options-list > button {
+  display: block;
+  width: 100%;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 11.5px;
+  line-height: 1.4;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+.post-options-list > a:hover,
+.post-options-list > button:hover,
+.post-options-list > a:focus-visible,
+.post-options-list > button:focus-visible {
+  background: var(--green-soft);
+  color: var(--text);
+}
+.post-card:has(.post-options[open]) { position: relative; z-index: 5; }
 .post-cover {
   display: block;
   width: 100%;
@@ -1856,6 +1910,16 @@ iframe.tmblr-iframe--unified-controls {
                 {block:Date}<a class="post-date-link" href="{Permalink}"><time>{ShortMonth} {DayOfMonth}, {Year}</time></a>{/block:Date}
                 {block:PinnedPostLabel}<span class="mid-dot">·</span><span>{PinnedPostLabel}</span>{/block:PinnedPostLabel}
               </div>
+              <details class="post-options">
+                <summary class="icon-button post-more" aria-label="More post options" title="More post options"><svg class="stroke-icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg></summary>
+                <div class="post-options-list">
+                  <button type="button" class="post-options-copy" data-permalink="{Permalink}">Copy link</button>
+                  <a href="{Permalink}">View post</a>
+                  {block:Date}<a href="/day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}/">Posted {ShortMonth} {DayOfMonth}, {Year}</a>{/block:Date}
+                  {block:RebloggedFrom}<a href="{ReblogParentURL}">Reblogged from</a>{/block:RebloggedFrom}
+                  {block:ContentSource}<a href="{SourceURL}">Source</a>{/block:ContentSource}
+                </div>
+              </details>
             </div>
             <div class="post-body post-content">
               {block:AskPage}<h2 class="post-text-title ask-page-title">send a message ♡</h2>{/block:AskPage}
@@ -2003,10 +2067,49 @@ iframe.tmblr-iframe--unified-controls {
     menuButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   });
   document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      const openMenu = document.querySelector('.post-options[open]');
+      if (openMenu) {
+        openMenu.open = false;
+        openMenu.querySelector('summary')?.focus();
+      }
+    }
     if (event.key === 'Escape' && sidebar?.classList.contains('open')) {
       sidebar.classList.remove('open');
       menuButton?.setAttribute('aria-expanded', 'false');
     }
+  });
+
+  const closeOtherPostMenus = (except) => {
+    document.querySelectorAll('.post-options[open]').forEach((menu) => {
+      if (menu !== except) menu.open = false;
+    });
+  };
+
+  document.addEventListener('toggle', (event) => {
+    const menu = event.target;
+    if (!menu.matches?.('.post-options') || !menu.open) return;
+    closeOtherPostMenus(menu);
+    const copy = menu.querySelector('.post-options-copy');
+    if (copy) copy.textContent = 'Copy link';
+  }, true);
+
+  document.addEventListener('click', async (event) => {
+    const copy = event.target.closest('.post-options-copy');
+    if (copy) {
+      event.preventDefault();
+      const url = copy.dataset.permalink;
+      if (!url) return;
+      try {
+        if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+        await navigator.clipboard.writeText(url);
+        copy.textContent = 'Copied!';
+      } catch {
+        window.prompt('Copy post link:', url);
+      }
+      return;
+    }
+    closeOtherPostMenus(event.target.closest('.post-options'));
   });
   document.addEventListener('click', (event) => {
     if (!sidebar || !menuButton || !sidebar.classList.contains('open')) return;

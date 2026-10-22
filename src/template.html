@@ -117,6 +117,16 @@ __INLINE_CSS__
                 {block:Date}<a class="post-date-link" href="{Permalink}"><time>{ShortMonth} {DayOfMonth}, {Year}</time></a>{/block:Date}
                 {block:PinnedPostLabel}<span class="mid-dot">·</span><span>{PinnedPostLabel}</span>{/block:PinnedPostLabel}
               </div>
+              <details class="post-options">
+                <summary class="icon-button post-more" aria-label="More post options" title="More post options"><svg class="stroke-icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg></summary>
+                <div class="post-options-list">
+                  <button type="button" class="post-options-copy" data-permalink="{Permalink}">Copy link</button>
+                  <a href="{Permalink}">View post</a>
+                  {block:Date}<a href="/day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}/">Posted {ShortMonth} {DayOfMonth}, {Year}</a>{/block:Date}
+                  {block:RebloggedFrom}<a href="{ReblogParentURL}">Reblogged from</a>{/block:RebloggedFrom}
+                  {block:ContentSource}<a href="{SourceURL}">Source</a>{/block:ContentSource}
+                </div>
+              </details>
             </div>
             <div class="post-body post-content">
               {block:AskPage}<h2 class="post-text-title ask-page-title">send a message ♡</h2>{/block:AskPage}
