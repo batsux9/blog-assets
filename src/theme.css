@@ -6,7 +6,7 @@
   --font: "Inter", sans-serif;
   --font-mono: "Geist Mono", monospace;
   --font-reading: var(--font);
-  --font-display: var(--font);
+  --font-display: "Sora", sans-serif;
 
   /* Post typography */
   --main-font-size: {select:Main Font Size}px;
@@ -102,6 +102,7 @@ button {
 a {
   color: inherit;
   text-decoration: none;
+  transition: color 160ms ease;
 }
 a:hover {
   color: var(--green);
@@ -135,6 +136,11 @@ img {
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+/* Keep Tumblr's own controls, without the opaque iframe background. */
+iframe.tmblr-iframe--unified-controls {
+  background: transparent !important;
+  color-scheme: only light !important;
 }
 /* The page wallpaper intentionally stays outside the solid app-style window. */
 .ambient {
@@ -314,15 +320,16 @@ img {
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 6px;
   min-height: 46px;
   padding: 5px 12px 5px 7px;
   border-radius: 7px;
   font-size: calc(var(--main-font-size) * 0.89655);
   border: 1px solid transparent;
   transition:
-    background 0.14s,
-    border-color 0.14s;
+    color 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease;
 }
 /* True Tabler filled glyphs, used only for navigation and player transport.
    The regular Tabler stylesheet stays in place for all other outline icons.
@@ -358,8 +365,9 @@ img {
   height: 30px;
   flex: 0 0 30px;
   color: var(--muted);
-  font-size: 24px;
+  font-size: 18px;
   line-height: 1;
+  transition: color 160ms ease;
 }
 .nav-item.active > .ti,
 .nav-item:hover > .ti { color: var(--text); }
@@ -422,6 +430,16 @@ img {
 .theme-button .stroke-icon {
   width: 17px;
   height: 17px;
+}
+/* Gentle hover feedback: colors only, no scaling or movement. */
+.theme-button,
+.icon-button,
+.tab,
+.tag-pill,
+.post-actions .action,
+.pagination a,
+.archive-links button {
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease;
 }
 .main-panel {
   position: relative;
