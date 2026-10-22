@@ -1853,7 +1853,7 @@ iframe.tmblr-iframe--unified-controls {
         </section>
         
         <nav class="side-nav" aria-label="Blog navigation">
-          <a class="nav-item active" href="/"><i class="ti ti-home nav-filled" aria-hidden="true"></i><span>home</span></a>
+          <a class="nav-item" href="local-preview.html"><i class="ti ti-home nav-filled" aria-hidden="true"></i><span>home</span></a>
           <a class="nav-item" href="/ask"><i class="ti ti-message-circle nav-filled" aria-hidden="true"></i><span>message</span></a>
           <a class="nav-item" href="/downloads"><i class="ti ti-download nav-filled" aria-hidden="true"></i><span>downloads</span></a>
           <a class="nav-item" href="/resources"><i class="ti ti-book nav-filled" aria-hidden="true"></i><span>resources</span></a>
@@ -1947,6 +1947,23 @@ iframe.tmblr-iframe--unified-controls {
   const themeButton = document.getElementById('themeButton');
   const menuButton = document.getElementById('menuButton');
   const sidebar = document.getElementById('sidebar');
+  // Keep the active sidebar item in sync with the actual route, including
+  // Tumblr Custom Pages and links configured through the theme options.
+  const cleanPath = (path) => path.replace(/\\/+$/, '') || '/';
+  const currentPath = cleanPath(window.location.pathname);
+  document.querySelectorAll('.side-nav .nav-item').forEach((link) => {
+    const destination = new URL(link.href, window.location.href);
+    const targetPath = cleanPath(destination.pathname);
+    const isHome = targetPath === '/' &&
+      (currentPath === '/' || /^\\/page\\/\\d+$/.test(currentPath));
+    const isCurrent = destination.origin === window.location.origin &&
+      (isHome || (targetPath !== '/' && targetPath === currentPath));
+
+    link.classList.toggle('active', isCurrent);
+    if (isCurrent) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  });
+
   const chosen = window.localStorage.getItem('batsu-theme');
   if (chosen === 'light' || chosen === 'dark') root.dataset.theme = chosen;
   themeButton?.addEventListener('click', () => {

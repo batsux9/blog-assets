@@ -4,6 +4,23 @@
   const themeButton = document.getElementById('themeButton');
   const menuButton = document.getElementById('menuButton');
   const sidebar = document.getElementById('sidebar');
+  // Keep the active sidebar item in sync with the actual route, including
+  // Tumblr Custom Pages and links configured through the theme options.
+  const cleanPath = (path) => path.replace(/\\/+$/, '') || '/';
+  const currentPath = cleanPath(window.location.pathname);
+  document.querySelectorAll('.side-nav .nav-item').forEach((link) => {
+    const destination = new URL(link.href, window.location.href);
+    const targetPath = cleanPath(destination.pathname);
+    const isHome = targetPath === '/' &&
+      (currentPath === '/' || /^\\/page\\/\\d+$/.test(currentPath));
+    const isCurrent = destination.origin === window.location.origin &&
+      (isHome || (targetPath !== '/' && targetPath === currentPath));
+
+    link.classList.toggle('active', isCurrent);
+    if (isCurrent) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  });
+
   const chosen = window.localStorage.getItem('batsu-theme');
   if (chosen === 'light' || chosen === 'dark') root.dataset.theme = chosen;
   themeButton?.addEventListener('click', () => {
