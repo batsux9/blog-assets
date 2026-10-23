@@ -59,7 +59,8 @@ must be pasted separately into that page's editor.
 Legacy photoset posts are rendered directly from the Tumblr photo blocks and
 layout token rather than the old `Photoset-700` iframe. The page loads
 PixelUnion's photoset script and stylesheet (the same approach used in Seyche's
-Lilac theme) and a scoped CSS radius on the individual photos.
+Lilac theme). Rounded corners clip the outer photoset shell; adjacent Rich Text
+images and NPF rows likewise share one gallery shell, with square inner corners.
 
 The theme customizer includes **Rounded Photo Corners** (on by default).
 The setting applies to legacy photosets, ordinary photos, and NPF images.

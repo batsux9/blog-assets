@@ -1354,18 +1354,20 @@ iframe.tmblr-iframe--unified-controls {
 }
 .post-content img { height: auto; }
 .post-content figure { max-width: 100%; margin: 0; }
+/* Photo rows clip as one shape when standalone; grouped rows share an outer shell. */
 .post-content .npf_row {
   display: flex;
   width: 100%;
   gap: 5px;
   margin: 0.7em 0 1em;
   align-items: stretch;
+  border-radius: var(--photo-corner-radius);
+  overflow: hidden;
 }
 .post-content .npf_row > figure { min-width: 0; }
-.post-content .npf_row img { display: block; width: 100%; height: auto; border-radius: var(--photo-corner-radius); }
-/* Rich Text posts put independent images inside figure.tmblr-full.
-   Clip each figure, not only its img, so rounded corners remain visible even
-   when Tumblr or a post stylesheet changes the image's own border radius. */
+.post-content .npf_row img { display: block; width: 100%; height: auto; border-radius: 0; }
+/* A single Rich Text image keeps its own corners; grouped images have square
+   inner edges and are clipped only by the surrounding gallery. */
 .post-content figure.tmblr-full {
   border-radius: var(--photo-corner-radius);
   overflow: hidden;
@@ -1374,9 +1376,31 @@ iframe.tmblr-iframe--unified-controls {
   display: block;
   max-width: 100%;
   height: auto;
-  border-radius: inherit;
+  border-radius: 0;
 }
 .post-content figure.tmblr-full > img { width: 100%; }
+.post-content .npf_photoset,
+.post-content .batsu-photo-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 0.7em 0 1em;
+  border-radius: var(--photo-corner-radius);
+  overflow: hidden;
+}
+.post-content .npf_photoset > .npf_row,
+.post-content .batsu-photo-gallery > .npf_row {
+  margin: 0;
+  border-radius: 0;
+  overflow: visible;
+}
+.post-content .npf_row figure.tmblr-full,
+.post-content .npf_photoset figure.tmblr-full,
+.post-content .batsu-photo-gallery figure.tmblr-full {
+  border-radius: 0;
+  overflow: visible;
+}
+.post-content .batsu-photo-gallery > .batsu-photo-spacer { display: none; }
 .post-content .npf_quote { font-size: 1.15em; line-height: 1.5; }
 .post-content .npf_link, .post-content .link-card {
   display: block; border: 1px solid var(--border); border-radius: 7px;
@@ -1428,8 +1452,8 @@ iframe.tmblr-iframe--unified-controls {
 .native-like:hover { color: var(--green); }
 .post-actions .stroke-icon { width: 19px; height: 19px; }
 .post-caption { margin-top: 10px; }
-/* The legacy photoset renders as real HTML, rather than an inaccessible iframe.
-   PixelUnion preserves the row layout. Each photo can be rounded separately. */
+/* Legacy PixelUnion photosets keep their row layout and lightbox, but the
+   photoset's outer shell owns the corners, not the individual photos. */
 .post-media { min-width: 0; }
 .post-media > img,
 .post-media > a img {
@@ -1438,7 +1462,11 @@ iframe.tmblr-iframe--unified-controls {
   height: auto;
   border-radius: var(--photo-corner-radius);
 }
-.photo-slideshow { max-width: 100%; }
+.photo-slideshow {
+  max-width: 100%;
+  border-radius: var(--photo-corner-radius);
+  overflow: hidden;
+}
 .photo-slideshow:not(.processed) .photo-data + .photo-data { margin-top: 5px; }
 .photo-slideshow:not(.processed) .photo-data img {
   display: block;
@@ -1446,12 +1474,10 @@ iframe.tmblr-iframe--unified-controls {
   height: auto;
 }
 .photo-slideshow .pxu-photo,
-.photo-slideshow .pxu-photo img {
-  border-radius: var(--photo-corner-radius);
-}
+.photo-slideshow .pxu-photo img,
+.photo-slideshow .tumblr-box { border-radius: 0; }
 .photo-slideshow .pxu-photo { overflow: hidden; }
 .photo-slideshow .pxu-photo img { display: block; max-width: 100%; }
-.photo-slideshow .tumblr-box { border-radius: var(--photo-corner-radius); }
 .post-media > iframe { max-width: 100%; }
 .post-media:empty { display: none; }
 .post-content .post-quote { background: var(--green-soft); border: 1px solid var(--green-border); border-radius: 6px; padding: 18px; }

@@ -35,6 +35,56 @@
     });
   }
 
+  // Tumblr's Rich Text posts may emit consecutive figure.tmblr-full elements,
+  // NPF rows, or blank spacer paragraphs. Wrap only uninterrupted image runs.
+  // Reblogs and captions stay in their original containers.
+  const photoUnits = new Set();
+  document.querySelectorAll('.post-content figure.tmblr-full, .post-content .npf_row')
+    .forEach((element) => {
+      const unit = element.closest('.npf_row') || element;
+      if (unit.closest('.npf_photoset, .photo-slideshow, .batsu-photo-gallery')) return;
+      if (!unit.querySelector('img')) return;
+      photoUnits.add(unit);
+    });
+  const isPhotoSpacer = (element) =>
+    element.matches('p') &&
+    !element.textContent.trim() &&
+    [...element.children].every((child) => child.matches('br'));
+
+  const photoParents = new Set([...photoUnits].map((unit) => unit.parentElement));
+  photoParents.forEach((parent) => {
+    if (!parent) return;
+    const siblings = [...parent.children];
+    for (let start = 0; start < siblings.length;) {
+      if (!photoUnits.has(siblings[start])) {
+        start++;
+        continue;
+      }
+      let cursor = start;
+      let count = 0;
+      let lastUnit = start;
+      while (cursor < siblings.length) {
+        if (photoUnits.has(siblings[cursor])) {
+          count++;
+          lastUnit = cursor;
+        } else if (!isPhotoSpacer(siblings[cursor])) {
+          break;
+        }
+        cursor++;
+      }
+      if (count > 1 || siblings[start].matches('.npf_row')) {
+        const gallery = document.createElement('div');
+        gallery.className = 'batsu-photo-gallery';
+        siblings[start].before(gallery);
+        siblings.slice(start, lastUnit + 1).forEach((element) => {
+          if (isPhotoSpacer(element)) element.classList.add('batsu-photo-spacer');
+          gallery.appendChild(element);
+        });
+      }
+      start = lastUnit + 1;
+    }
+  });
+
   const chosen = window.localStorage.getItem('batsu-theme');
   if (chosen === 'light' || chosen === 'dark') root.dataset.theme = chosen;
   themeButton?.addEventListener('click', () => {
